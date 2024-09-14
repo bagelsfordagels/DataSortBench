@@ -1,4 +1,4 @@
-public class userPrototype{
+public class UserPrototype{
 	public void prototype(DataStorageSystem dss) {
 		//send data to data storage system
 		//test to compile
