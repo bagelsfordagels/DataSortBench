@@ -5,9 +5,15 @@ public class UserPrototype{
 		String[] arr = {"apple","bannana"};
 		//key is associated with specific data storage system needs
 		int key = dss.sendData(arr);
-		
+
 		// retrieve data from storage system
-		
+
 		dss.recieveData(key);
+		
+		InputConfig inputConfig = new InputConfig() {
+			
+		};
+		OutputConfig outputConfig = null;
+		ComputeRequest request = new ComputeRequest(inputConfig, outputConfig, ',');
 	}
 }
