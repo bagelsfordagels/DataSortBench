@@ -1,6 +1,6 @@
 
 public interface DataStorageSystem {
-	public int sendData(String[] arr);
-	public void recieveData(int key);
+	public char[] sendData(int key);
+	public char[] recieveData(int UserData);
 }
 
