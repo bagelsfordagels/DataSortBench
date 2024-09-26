@@ -1,9 +1,9 @@
 
 public interface StorageToLoad {
 
-	int storedata(int[] arr);
+	char[] storedata(char[] arr);
 
-	void returndata(int key);
+	char[] returndata(char[] arr);
 
 
 }

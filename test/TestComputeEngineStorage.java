@@ -11,7 +11,7 @@ public class TestComputeEngineStorage{
 		
 		char[] arr = {'a','b'};
 		
-		if(testCEImplementation.sendData(1) != 1) {
+		if(testCEImplementation.sendData(1) != 2) {
 			Assertions.fail();
 		}
 		
