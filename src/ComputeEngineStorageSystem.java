@@ -1,4 +1,5 @@
 public interface ComputeEngineStorageSystem {
-	int sendData(String[] arr);
-	String[] retreiveData(int key);
+	int sendData(int key);
+	char[] retreiveSortedData(int key);
+	
 }

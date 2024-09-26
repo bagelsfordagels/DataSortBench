@@ -4,16 +4,17 @@ public class UserPrototype{
 		//test to compile
 		String[] arr = {"apple","bannana"};
 		//key is associated with specific data storage system needs
-		int key = dss.sendData(arr);
+		char[] c = dss.sendData(1);
 
 		// retrieve data from storage system
 
-		dss.recieveData(key);
+		dss.recieveData(1);
 		
 		InputConfig inputConfig = new InputConfig() {
 			
 		};
 		OutputConfig outputConfig = null;
 		ComputeRequest request = new ComputeRequest(inputConfig, outputConfig, ',');
+
 	}
 }
