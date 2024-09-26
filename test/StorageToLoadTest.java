@@ -7,10 +7,10 @@ public class StorageToLoadTest{
 	public void storageToLoadSmokeTest() {
 		StorageToLoadImp testStorageToLoad = new StorageToLoadImp();
 		char[] testArray = new char[0];
-		if(testStorageToLoad.storedata(testArray).length != testArray.length && testStorageToLoad.storedata(testArray).length <= 0){
+		if(testStorageToLoad.storedata(testArray).length != testArray.length || testStorageToLoad.storedata(testArray).length <= 0){
 			Assertions.fail();
 		}
-		if(testStorageToLoad.returndata(testArray).length != testArray.length && testStorageToLoad.storedata(testArray).length <= 0){
+		if(testStorageToLoad.returndata(testArray).length != testArray.length || testStorageToLoad.storedata(testArray).length <= 0){
 			Assertions.fail();
 		}
 	}
