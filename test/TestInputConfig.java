@@ -1,5 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-public class testInputConfig implements InputConfig{
+public class TestInputConfig implements InputConfig{
 	private List<Integer> input = new ArrayList<>();
 }
