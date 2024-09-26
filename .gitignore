@@ -8,3 +8,4 @@ gradle.properties
 test/Extest.java
 .classpath
 .classpath
+.classpath

@@ -8,6 +8,6 @@ import org.mockito.Mockito;
 public class InputOutputTest{
 	public void testInput() throws Exception{
 		//UserImp mockUserImp = Mockito.mock(UserImp.class);
-		
+		//when(mockUserImp.input(any(List<Integer>)))
 	}
 }
