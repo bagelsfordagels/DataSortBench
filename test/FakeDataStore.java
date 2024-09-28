@@ -1,8 +1,10 @@
+import java.util.UUID;
+
 public class FakeDataStore implements DataStorageSystem{
-	public char[] sendData(int key) {
+	public UUID sendData(int userData) {
 		return null;
 	}
-	public char[] recieveData(int userData) {
+	public char[] recieveData(UUID key) {
 		return null;
 	}
 	public boolean testDataStore() {
