@@ -5,7 +5,7 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 	char[] sortedData;
 	
 	@Override
-	public UUID sendData(int key) {
+	public UUID sendData(int userData) {
 		// TODO Auto-generated method stub
 		UUID userKey = UUID.randomUUID();
 		return userKey;

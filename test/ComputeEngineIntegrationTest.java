@@ -33,14 +33,14 @@ public class ComputeEngineIntegrationTest implements InputConfig, OutputConfig{
 
 
         // Trigger computation
-        computeEngine.sendData(key);
-        computeEngine.sendData(key1);
-        computeEngine.sendData(key2);
+        UUID userKey = computeEngine.sendData(userData);
+        UUID userKey1 = computeEngine.sendData(userData1);
+        UUID userKey2 = computeEngine.sendData(userData2);
 
         // Retrieve output data
-        char[] resultData = computeEngine.retreiveSortedData(key);
-        char[] resultData1 = computeEngine.retreiveSortedData(key1);
-        char[] resultData2 = computeEngine.retreiveSortedData(key2);
+        char[] resultData = computeEngine.retreiveSortedData(userKey);
+        char[] resultData1 = computeEngine.retreiveSortedData(userKey1);
+        char[] resultData2 = computeEngine.retreiveSortedData(userKey2);
         
         char[] correctArr = {'h','g','l'};
         if(resultData != correctArr) {
