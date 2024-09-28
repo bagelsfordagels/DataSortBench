@@ -1,4 +1,3 @@
-import java.util.List;
 public class FakeDataStore implements DataStorageSystem{
 	public char[] sendData(int key) {
 		return null;
