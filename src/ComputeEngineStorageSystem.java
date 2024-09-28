@@ -1,5 +1,7 @@
+import java.util.UUID;
+
 public interface ComputeEngineStorageSystem {
-	int sendData(int key);
-	char[] retreiveSortedData(int key);
+	UUID sendData(int userData);
+	char[] retreiveSortedData(UUID key);
 	
 }

@@ -1,4 +1,7 @@
 import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.UUID;
+
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,12 +13,13 @@ public class TestDataStorage{
 		DataStorageImplementation testDSImplementation = new DataStorageImplementation();
 		
 		char[] testArr= {'q','w'};
+		UUID key = UUID.randomUUID();
 		
-		if (testDSImplementation.sendData(1).length != testArr.length) {
+		if (testDSImplementation.sendData(1) != key) {
 			Assertions.fail();
 		}
 		
-		if(testDSImplementation.recieveData(0).length != testArr.length) {
+		if(testDSImplementation.recieveData(key).length != testArr.length) {
 			Assertions.fail();
 		}
 	}

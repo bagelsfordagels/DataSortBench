@@ -1,4 +1,7 @@
 import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.UUID;
+
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,12 +13,14 @@ public class TestComputeEngineStorage{
 		ComputeEngineStorageImplementation testCEImplementation = new ComputeEngineStorageImplementation();
 		
 		char[] arr = {'a','b'};
+		UUID key = UUID.randomUUID();
 		
-		if(testCEImplementation.sendData(1) != 2) {
+		if (testCEImplementation.sendData(1) != key) {
 			Assertions.fail();
 		}
 		
-		if(testCEImplementation.retreiveSortedData(1).length != arr.length) {
+		
+		if(testCEImplementation.retreiveSortedData(key).length != arr.length) {
 			Assertions.fail();
 		}
 	}
