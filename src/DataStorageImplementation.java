@@ -54,5 +54,9 @@ public class DataStorageImplementation implements DataStorageSystem, InputConfig
 		// TODO Auto-generated method stub
 		return this.userData;
 	}
+	
+	public String getUserFileData() {
+		return null;
+	}
 
 }
