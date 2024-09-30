@@ -13,7 +13,7 @@ public class DataStorageImplementation implements DataStorageSystem, InputConfig
 		userData = userInt;
 	}
 
-	public void DataStorageImplementaion(int userData) {
+	public void dataStorageImplementaion(int userData) {
 		this.userData = userData;
 		this.result = null; 
 	}
