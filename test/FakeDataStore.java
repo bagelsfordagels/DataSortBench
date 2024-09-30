@@ -13,7 +13,7 @@ public class FakeDataStore implements DataStorageSystem{
 		int incount = 0;
 		int outcount = 0;
 		//tests if the input List are empty
-		if(inputConfig.getInputData().size() == 0) {
+		if(inputConfig.getUserData() == 0) {
 			System.out.println("Input list is empty");
 			return false;
 		}
@@ -23,10 +23,10 @@ public class FakeDataStore implements DataStorageSystem{
 			return false;
 		}
 		//runs through the input list to make sure it can be read
-		for(int i=0;i<inputConfig.getInputData().size();i++) {
+		for(int i=0;i<inputConfig.getUserData();i++) {
 			incount++;
 		}
-		if(inputConfig.getInputData().size() == incount) {
+		if(inputConfig.getUserData() == incount) {
 			return true;
 		}
 		//runs through the output list to make sure that it can be read
