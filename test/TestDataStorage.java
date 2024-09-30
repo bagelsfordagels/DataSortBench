@@ -10,7 +10,7 @@ public class TestDataStorage{
 	
 	@Test
 	public void test() {
-		DataStorageImplementation testDSImplementation = new DataStorageImplementation();
+		DataStorageImplementation testDSImplementation = new DataStorageImplementation(1);
 		
 		char[] testArr= {'q','w'};
 		UUID key = UUID.randomUUID();

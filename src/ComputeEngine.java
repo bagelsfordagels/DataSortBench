@@ -3,10 +3,10 @@ import java.util.Random;
 
 public class ComputeEngine{
 	//method to do convert int to randomized char array
-	int userData;
+	int userInt;
 	
-	public ComputeEngine(int userData) {
-		this.userData = userData;
+	public ComputeEngine(int userInt) {
+		this.userInt = userInt;
 	}
 	
 	public static char[] mkArr(int userData) {
@@ -22,10 +22,12 @@ public class ComputeEngine{
         return randomArr;
 	}
 	
-	public static void main(String[] args) {
-		char[] a = mkArr(5);
-		for(int i = 0; i < a.length; i++) {
-			System.out.print(a[i] + " ");
-		}
-	}
+	
+	
+//	public static void main(String[] args) {
+//		char[] a = mkArr(5);
+//		for(int i = 0; i < a.length; i++) {
+//			System.out.print(a[i] + " ");
+//		}
+//	}
 }

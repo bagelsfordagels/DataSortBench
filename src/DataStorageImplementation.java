@@ -2,10 +2,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class DataStorageImplementation implements DataStorageSystem{
-//	int userData;
-//	char[] sortedData;
+public class DataStorageImplementation implements DataStorageSystem, InputConfig{
+	private int userData;
+	private char[] result;
 //
+	
+
+	public DataStorageImplementation(int userInt) {
+		// TODO Auto-generated constructor stub
+		userData = userInt;
+	}
+
+	public void dataStorageImplementaion(int userData) {
+		this.userData = userData;
+		this.result = null; 
+	}
 //	@Override
 //	public char[] sendData(int key) {
 //		// TODO Auto-generated method stub
@@ -37,5 +48,11 @@ public class DataStorageImplementation implements DataStorageSystem{
         }
         return result;
     }
+
+	@Override
+	public int getUserData() {
+		// TODO Auto-generated method stub
+		return this.userData;
+	}
 
 }
