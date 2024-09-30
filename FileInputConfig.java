@@ -1,9 +1,9 @@
 public class FileInputConfig implements InputConfig{
-	String UserFile;
+	String userFile;
 	public int getUserData() {
 		return 0;
 	}
 	public String getUserFileData() {
-		return UserFile;
+		return userFile;
 	}
 }
