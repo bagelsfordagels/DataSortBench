@@ -22,6 +22,10 @@ public class ComputeEngine{
         return randomArr;
 	}
 	
+	public static void readFile(InputConfig fileName) {
+		
+	}
+	
 	
 	
 //	public static void main(String[] args) {
