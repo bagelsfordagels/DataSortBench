@@ -4,8 +4,7 @@ public class FakeDataStore implements DataStorageSystem{
 	public UUID sendData(int userData) {
 		return null;
 	}
-	public char[] recieveData(UUID key) {
-		return null;
+	public void recieveData(UUID key) {
 	}
 	public boolean testDataStore() {
 		TestInputConfig inputConfig = new TestInputConfig();
@@ -37,5 +36,10 @@ public class FakeDataStore implements DataStorageSystem{
 			return true;
 		}
 		return false;
+	}
+	@Override
+	public UUID sendData(InputConfig userdata) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
