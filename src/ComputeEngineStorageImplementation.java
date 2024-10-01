@@ -34,7 +34,9 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 			return c;
 			
 		}
-		
+		else {
+			return null;
+		}
 		
 
 	}
