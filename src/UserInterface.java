@@ -5,19 +5,20 @@ import java.util.UUID;
 public class UserInterface{
 	public static void main(String[] args) throws Exception {
 		
-		@SuppressWarnings("resource")
+
 		Scanner userData = new Scanner(System.in);
 		System.out.println("If you would like to enter an integer enter 1/nif you would like to enter a file enter 2:");
 		
 		int userChoice = 0;
 		try {
-			userData.nextInt();
+			userChoice = userData.nextInt();
 		} catch(InputMismatchException e) {
 			System.out.println("Invalid input. Please enter 1 or a file name.");
 			userData.nextLine(); // Clear the invalid input from the scanner buffer
 			userData.close();
 			return; // Exit the program if input is not an integer
 		}
+		
 		ComputeEngineStorageSystem css = new ComputeEngineStorageImplementation();
 		if(userChoice == 1) {
 			System.out.println("please enter an integer: ");
