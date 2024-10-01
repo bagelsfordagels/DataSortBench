@@ -47,8 +47,7 @@ public class UserInterface{
 			UUID key = css.sendData(userFileInputConfig);
 			css.retreiveSortedData(key);
 			
-		}
-		else {
+		} else {
 			System.out.println("Incorrect input");
 		}
 		

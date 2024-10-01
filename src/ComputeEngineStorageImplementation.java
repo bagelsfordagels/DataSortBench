@@ -33,8 +33,7 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 			char[] c = {'c','c','c'};
 			return c;
 			
-		}
-		else {
+		} else {
 			return null;
 		}
 		
