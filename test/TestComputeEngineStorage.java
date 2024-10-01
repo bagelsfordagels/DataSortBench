@@ -14,8 +14,8 @@ public class TestComputeEngineStorage{
 		
 		char[] arr = {'a','b'};
 		UUID key = UUID.randomUUID();
-		
-		if (testCEImplementation.sendData(1) != key) {
+		InputConfig i = new IntegerInputConfig(1);
+		if (testCEImplementation.sendData(i) != key) {
 			Assertions.fail();
 		}
 		
