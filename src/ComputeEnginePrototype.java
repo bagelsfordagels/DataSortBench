@@ -6,21 +6,24 @@ public class ComputeEnginePrototype implements ComputeEngineStorageSystem{
 		//test to compile
 		char[] arr = {'a','b'};
 		//key is associated with certain data compute engine needs
-		UUID key =  cess.sendData(1);
+		InputConfig i = new IntegerInputConfig(1);
+		UUID key =  cess.sendData(i);
 		
 		//receive data from compute engine
 		//key is associated with sorted data
 		cess.retreiveSortedData(key);
 	}
 
+
+
 	@Override
-	public UUID sendData(int userData) {
+	public char[] retreiveSortedData(UUID key) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public char[] retreiveSortedData(UUID key) {
+	public UUID sendData(InputConfig userData) {
 		// TODO Auto-generated method stub
 		return null;
 	}
