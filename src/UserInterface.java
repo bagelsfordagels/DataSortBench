@@ -26,6 +26,8 @@ public class UserInterface{
 		}
 		if(userChoice == 2) {
 			System.out.println("Enter the file name: ");
+			String userInput = userData.next();
+			
 			
 
 			
