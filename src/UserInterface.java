@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.UUID;
 
 public class UserInterface{
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 		@SuppressWarnings("resource")
 		Scanner userData = new Scanner(System.in);
@@ -27,7 +27,7 @@ public class UserInterface{
 		if(userChoice == 2) {
 			System.out.println("Enter the file name: ");
 			
-			InputConfig userInputConfig = new 
+
 			
 		}
 		else {
