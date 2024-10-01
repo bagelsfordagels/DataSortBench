@@ -4,6 +4,7 @@ import java.util.UUID;
 
 public class DataStorageImplementation implements DataStorageSystem, InputConfig{
 	private int userData;
+	private String fileName;
 	private char[] result;
 //
 	
@@ -11,6 +12,10 @@ public class DataStorageImplementation implements DataStorageSystem, InputConfig
 	public DataStorageImplementation(int userInt) {
 		// TODO Auto-generated constructor stub
 		userData = userInt;
+	}
+	
+	public DataStorageImplementation(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public void dataStorageImplementaion(int userData) {
