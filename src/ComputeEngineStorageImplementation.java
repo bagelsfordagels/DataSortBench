@@ -6,9 +6,9 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 	int userData;
 	char[] sortedData;
 	
-	private Map<UUID, Integer> dataStore = new HashMap<>();
+	private Map<UUID, InputConfig> dataStore = new HashMap<>();
 	// puts user entered integer into map and links it to random key
-	public UUID sendData(int userData) {
+	public UUID sendData(InputConfig userData) {
 		UUID userKey = UUID.randomUUID();
 		dataStore.put(userKey,userData);
 		return userKey;
@@ -16,7 +16,7 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 
 	public char[] retreiveSortedData(UUID key) {
 		// retrieves user entered integer from map
-		Integer userInt = dataStore.get(key);
+		InputConfig userInt = dataStore.get(key);
 //		ComputeEngine ce = new ComputeEngine(userInt);
 //		ComputeEnginePrototype cep = new ComputeEnginePrototype();
 //		cep.se

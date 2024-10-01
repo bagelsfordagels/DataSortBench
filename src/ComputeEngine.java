@@ -9,11 +9,11 @@ public class ComputeEngine{
 		this.userInt = userInt;
 	}
 	
-	public static char[] mkArr(int userData) {
-		char[] randomArr = new char[userData];
+	public static char[] mkArr(InputConfig userData) {
+		char[] randomArr = new char[userData.getUserData()];
 		Random random = new Random();
 
-        for (int i = 0; i < userData; i++) {
+        for (int i = 0; i < userData.getUserData(); i++) {
             // Generate a random character between 'a' and 'z' (lowercase letters)
             char randomChar = (char) ('a' + random.nextInt(26));
             randomArr[i] = randomChar;
