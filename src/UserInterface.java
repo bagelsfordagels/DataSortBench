@@ -15,6 +15,7 @@ public class UserInterface{
 		} catch(InputMismatchException e) {
 			System.out.println("Invalid input. Please enter 1 or a file name.");
 			userData.nextLine(); // Clear the invalid input from the scanner buffer
+			userData.close();
 			return; // Exit the program if input is not an integer
 		}
 		ComputeEngineStorageSystem css = new ComputeEngineStorageImplementation();
@@ -46,7 +47,7 @@ public class UserInterface{
 			
 		}
 		else {
-			throw new Exception("Incorrect input");
+			System.out.println("Incorrect input");
 		}
 		
 		userData.close();
