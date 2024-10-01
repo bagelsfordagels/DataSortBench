@@ -22,9 +22,10 @@ public class ComputeEngineIntegrationTest implements InputConfig, OutputConfig{
     @Test
     public void testComputeEngine() {
     	UserPrototype user = new UserPrototype();
-    	int userData =  1;
-    	int userData1 = 10;
-    	int userData2 = 25;
+    	InputConfig userData =  new IntegerInputConfig(1);
+    	InputConfig userData1 =  new IntegerInputConfig(10);
+    	InputConfig userData2 =  new IntegerInputConfig(20);
+    	
     	UUID key = user.sendData(userData);
     	UUID key1 = user.sendData(userData1);
     	UUID key2 = user.sendData(userData2);
