@@ -1,7 +1,7 @@
 import java.util.UUID;
 
 public interface DataStorageSystem {
-	public UUID sendData(int userdata);
-	public char[] recieveData(UUID key);
+	public UUID sendData(InputConfig userdata);
+	public void recieveData(UUID key);
 }
 

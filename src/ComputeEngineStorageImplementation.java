@@ -16,12 +16,25 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 
 	public char[] retreiveSortedData(UUID key) {
 		// retrieves user entered integer from map
-		InputConfig userInt = dataStore.get(key);
-//		ComputeEngine ce = new ComputeEngine(userInt);
-//		ComputeEnginePrototype cep = new ComputeEnginePrototype();
-//		cep.se
-		char[] arr = ComputeEngine.mkArr(userInt);
-		return arr;
+		// if user enters integer
+		if(dataStore.get(key) instanceof IntegerInputConfig) {
+			InputConfig userInt = dataStore.get(key);
+			char[] arr = ComputeEngine.mkArr(userInt);
+			return arr;
+		}
+		// if user enters file name
+		if(dataStore.get(key) instanceof FileInputConfig) {
+			InputConfig file = dataStore.get(key);
+			DataStorageSystem dss = new DataStorageImplementation();
+			dss.sendData(file);
+			ComputeEngine.readFile(file);
+			// just for compiling
+			// not sure what it should be returning 
+			char[] c = {'c','c','c'};
+			return c;
+			
+		}
+		
 		
 
 	}

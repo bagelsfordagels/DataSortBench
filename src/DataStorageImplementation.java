@@ -2,26 +2,26 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class DataStorageImplementation implements DataStorageSystem, InputConfig{
-	private int userData;
-	private String fileName;
-	private char[] result;
+public class DataStorageImplementation implements DataStorageSystem{
+//	private int userData;
+//	private String fileName;
+//	private char[] result;
+////
+//	
 //
-	
-
-	public DataStorageImplementation(int userInt) {
-		// TODO Auto-generated constructor stub
-		userData = userInt;
-	}
-	
-	public DataStorageImplementation(String fileName) {
-		this.fileName = fileName;
-	}
-
-	public void dataStorageImplementaion(int userData) {
-		this.userData = userData;
-		this.result = null; 
-	}
+//	public DataStorageImplementation(int userInt) {
+//		// TODO Auto-generated constructor stub
+//		userData = userInt;
+//	}
+//	
+//	public DataStorageImplementation(String fileName) {
+//		this.fileName = fileName;
+//	}
+//
+//	public void dataStorageImplementaion(int userData) {
+//		this.userData = userData;
+//		this.result = null; 
+//	}
 //	@Override
 //	public char[] sendData(int key) {
 //		// TODO Auto-generated method stub
@@ -37,21 +37,17 @@ public class DataStorageImplementation implements DataStorageSystem, InputConfig
 //	}
 	
 	
-	private Map<UUID, Integer> dataStore = new HashMap<>();
+	private Map<UUID, InputConfig> dataStore = new HashMap<>();
 
-	public UUID sendData(int userData) {
+	public UUID sendData(InputConfig userData) {
         UUID key = UUID.randomUUID();
         dataStore.put(key, userData);
         return key;
     }
 
-	public char[] recieveData(UUID key) {
-        Integer storedData = dataStore.get(key);
-        char[] result = new char[storedData];
-        for (int i = 0; i < storedData; i++) {
-            result[i] = (char) (storedData + '0'); 
-        }
-        return result;
+	public void recieveData(UUID key) {
+        InputConfig storedData = dataStore.get(key);
+        
     }
 
 	@Override
