@@ -26,9 +26,9 @@ public class ComputeEngineIntegrationTest implements InputConfig, OutputConfig{
     	InputConfig userData1 =  new IntegerInputConfig(10);
     	InputConfig userData2 =  new IntegerInputConfig(20);
     	
-    	UUID key = user.sendData(1);
-    	UUID key1 = user.sendData(10);
-    	UUID key2 = user.sendData(20);
+    	UUID key = user.sendData(userData);
+    	UUID key1 = user.sendData(userData1);
+    	UUID key2 = user.sendData(userData2);
     	
         ComputeEngineStorageImplementation computeEngine = new ComputeEngineStorageImplementation();
 
