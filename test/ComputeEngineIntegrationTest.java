@@ -61,5 +61,11 @@ public class ComputeEngineIntegrationTest implements InputConfig, OutputConfig{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public String getUserFileData() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 

@@ -10,5 +10,11 @@ public class IntegerInputConfig implements InputConfig{
 		// TODO Auto-generated method stub
 		return userInt;
 	}
+
+	@Override
+	public String getUserFileData() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
