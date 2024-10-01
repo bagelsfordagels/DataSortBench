@@ -27,32 +27,25 @@ import java.util.UUID;
 public class UserPrototype implements DataStorageSystem{
 	    public void prototype(DataStorageSystem dss) {
 	        // Send data to data storage system
-	        int data = 1;
+	        InputConfig data = new IntegerInputConfig(1);
 	        UUID key = dss.sendData(data);
 
 	        // Retrieve data from storage system
-	        char[] result = dss.recieveData(key);
+	        dss.recieveData(key);
 
-	        // Process the result
-	        System.out.println("Received data: " + Arrays.toString(result));
 	    }
 	    
-	    private Map<UUID, Integer> dataStore = new HashMap<>();
+	    private Map<UUID, InputConfig> dataStore = new HashMap<>();
 
 		@Override
-		public UUID sendData(int userData) {
+		public UUID sendData(InputConfig userData) {
 	        UUID key = UUID.randomUUID();
 	        dataStore.put(key, userData);
 	        return key;
 	    }
 
 		@Override
-		public char[] recieveData(UUID key) {
-	        Integer storedData = dataStore.get(key);
-	        char[] result = new char[storedData];
-	        for (int i = 0; i < storedData; i++) {
-	            result[i] = (char) (storedData + '0'); // Convert int to char
-	        }
-	        return result;
+		public void recieveData(UUID key) {
+	        InputConfig storedData = dataStore.get(key);
 	    }
 	}

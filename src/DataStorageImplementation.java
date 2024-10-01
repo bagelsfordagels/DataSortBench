@@ -49,11 +49,4 @@ public class DataStorageImplementation implements DataStorageSystem{
         InputConfig storedData = dataStore.get(key);
         
     }
-
-	@Override
-	public int getUserData() {
-		// TODO Auto-generated method stub
-		return this.userData;
-	}
-
 }
