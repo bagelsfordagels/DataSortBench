@@ -1,5 +1,8 @@
 import java.util.UUID;
-
+import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Assertions;
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
 public class FakeDataStore implements DataStorageSystem{
 	public UUID sendData(int userData) {
 		return null;
