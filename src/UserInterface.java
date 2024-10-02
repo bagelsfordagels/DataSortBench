@@ -1,10 +1,14 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.UUID;
-
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 public class UserInterface{
 	public static void main(String[] args){
-		
+		//the 2 strings are used when reading in a file
+		String usersFileData = null;
+		String line = null;
 
 		Scanner userData = new Scanner(System.in);
 		System.out.println("If you would like to enter an integer enter 1/nif you would like to enter a file enter 2:");
@@ -40,9 +44,18 @@ public class UserInterface{
 		}
 		if(userChoice == 2) {
 			System.out.println("Enter the file name: ");
-			String userInput = userData.next();
-			
-			InputConfig userFileInputConfig = new FileInputConfig(userInput);
+			String fileName = userData.next();
+			try(FileReader in = new FileReader(fileName +".txt")){
+				BufferedReader br = new BufferedReader(in);
+				//grabbing the next line and adding it to line String to store file as a string for FileInputConfig
+				while((line = br.readLine()) != null) {
+					usersFileData += line;
+				}
+			//catching possible errors while reading the file (Ex: File not found)
+			}catch(IOException e){
+				System.out.println("Error while reading file");
+			}
+			InputConfig userFileInputConfig = new FileInputConfig(usersFileData);
 			
 			UUID key = css.sendData(userFileInputConfig);
 			css.retreiveSortedData(key);
