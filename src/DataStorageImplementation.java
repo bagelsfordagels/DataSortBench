@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -6,6 +10,8 @@ public class DataStorageImplementation implements DataStorageSystem{
 //	private int userData;
 //	private String fileName;
 //	private char[] result;
+	String usersFileData = null;
+	String line = null;
 ////
 //	
 //
@@ -45,8 +51,20 @@ public class DataStorageImplementation implements DataStorageSystem{
         return key;
     }
 
-	public void recieveData(UUID key) {
-        InputConfig storedData = dataStore.get(key);
+	public ArrayList<Integer> recieveData(UUID key) {
+		ArrayList<Integer> userInts = new ArrayList<>();
+        InputConfig fileName = dataStore.get(key);
+        try(FileReader in = new FileReader(fileName +".txt")){
+			BufferedReader br = new BufferedReader(in);
+			//grabbing the next line and adding it to line String to store file as a string for FileInputConfig
+			while((line = br.readLine()) != null) {
+				userInts.add(Integer.parseInt(line));
+			}
+		//catching possible errors while reading the file (Ex: File not found)
+		}catch(IOException e){
+			System.out.println("Error while reading file");
+		}
         
+		return userInts;
     }
 }
