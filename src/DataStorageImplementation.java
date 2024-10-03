@@ -1,5 +1,8 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,4 +70,24 @@ public class DataStorageImplementation implements DataStorageSystem{
         
 		return userInts;
     }
+	
+	public File mkFile(ArrayList<char[]> charAl) throws IOException{
+		File userFile = new File("UserData.txt");
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter("UserData.txt"));
+			
+	        for (char[] characterArray : charAl) {
+	            for (char character : characterArray) {
+	                writer.write(character);
+	            }
+	            writer.newLine();
+	        }
+
+	        writer.close();
+		}catch(IOException e) {
+			System.out.println("Error while writing file");
+		}
+		
+		return userFile;
+	}
 }
