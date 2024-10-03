@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -27,8 +28,9 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 			InputConfig file = dataStore.get(key);
 			DataStorageSystem dss = new DataStorageImplementation();
 			ComputeEngine cpe = new ComputeEngine();
-			dss.sendData(file);
-			cpe.readFile(file);
+			UUID fileKey = dss.sendData(file);
+			ArrayList<Integer> userInts = dss.recieveData(fileKey);
+			cpe.readFile(userInts);
 			// just for compiling
 			// not sure what it should be returning 
 			char[] c = {'c','c','c'};

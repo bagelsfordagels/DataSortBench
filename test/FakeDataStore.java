@@ -1,15 +1,13 @@
+import java.util.ArrayList;
 import java.util.UUID;
-import static org.junit.jupiter.api.Assertions.fail;
-import org.junit.jupiter.api.Assertions;
-import org.junit.Assert;
-import org.junit.jupiter.api.Test;
 
 
 public class FakeDataStore extends DataStorageImplementation{
 	public UUID sendData(int userData) {
 		return null;
 	}
-	public void recieveData(UUID key) {
+	public ArrayList<Integer> recieveData(UUID key) {
+		return null;
 	}
 	public boolean testDataStore() {
 		TestInputConfig inputConfig = new TestInputConfig();

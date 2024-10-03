@@ -1,6 +1,3 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -9,8 +6,7 @@ public class ComputeEngine{
 	//method to do convert int to randomized char array
 	int userInt;
 	//the 2 strings are used when reading in a file
-	String usersFileData = null;
-	String line = null;
+	
 	//public ComputeEngine(int userInt) {
 		//this.userInt = userInt;
 	//}
@@ -28,18 +24,10 @@ public class ComputeEngine{
         return randomArr;
 	}
 	
-	public ArrayList<char[]> readFile(InputConfig fileName) {
-		try(FileReader in = new FileReader(fileName +".txt")){
-			BufferedReader br = new BufferedReader(in);
-			//grabbing the next line and adding it to line String to store file as a string for FileInputConfig
-			while((line = br.readLine()) != null) {
-				usersFileData += line;
-			}
-		//catching possible errors while reading the file (Ex: File not found)
-		}catch(IOException e){
-			System.out.println("Error while reading file");
-		}
+	public ArrayList<char[]> readFile(ArrayList<Integer> userInts) {
+		
 		return null;
+		
 	}
 	
 	

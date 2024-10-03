@@ -1,7 +1,8 @@
+import java.util.ArrayList;
 import java.util.UUID;
 
 public interface DataStorageSystem {
 	public UUID sendData(InputConfig userdata);
-	public void recieveData(UUID key);
+	public ArrayList<Integer> recieveData(UUID key);
 }
 
