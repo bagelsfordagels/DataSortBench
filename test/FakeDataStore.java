@@ -3,7 +3,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Assertions;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-public class FakeDataStore implements DataStorageSystem{
+
+
+public class FakeDataStore extends DataStorageImplementation{
 	public UUID sendData(int userData) {
 		return null;
 	}
