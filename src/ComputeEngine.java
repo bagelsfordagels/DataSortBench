@@ -25,8 +25,20 @@ public class ComputeEngine{
 	}
 	
 	public ArrayList<char[]> readFile(ArrayList<Integer> userInts) {
-		
-		return null;
+		ArrayList<char[]> listCharArrs = new ArrayList<>();
+		for(int j = 0; j<userInts.size();j++) {
+			char[] randomArr = new char[userInts.get(j)];
+			Random random = new Random();
+
+	        for (int i = 0; i < userInts.get(j); i++) {
+	            // Generate a random character between 'a' and 'z' (lowercase letters)
+	            char randomChar = (char) ('a' + random.nextInt(26));
+	            randomArr[i] = randomChar;
+	        }
+	        Arrays.sort(randomArr);
+	        listCharArrs.add(randomArr);
+		}
+		return listCharArrs;
 		
 	}
 	
