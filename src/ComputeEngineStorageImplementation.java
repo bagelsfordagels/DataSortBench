@@ -17,7 +17,7 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 		return userKey;
 	}
 
-	public char[] retreiveSortedData(UUID key) {
+	public char[] retreiveSortedData(UUID key) throws IOException{
 		// retrieves user entered integer from map
 		// if user enters integer
 		if(dataStore.get(key) instanceof IntegerInputConfig) {

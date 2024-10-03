@@ -5,7 +5,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 public class UserInterface{
-	public static void main(String[] args){
+	public static void main(String[] args) throws IOException{
 		
 
 		Scanner userData = new Scanner(System.in);
