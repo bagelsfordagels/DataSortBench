@@ -11,9 +11,9 @@ public class ComputeEngine{
 	//the 2 strings are used when reading in a file
 	String usersFileData = null;
 	String line = null;
-	public ComputeEngine(int userInt) {
-		this.userInt = userInt;
-	}
+	//public ComputeEngine(int userInt) {
+		//this.userInt = userInt;
+	//}
 	
 	public static char[] mkArr(InputConfig userData) {
 		char[] randomArr = new char[userData.getUserData()];
