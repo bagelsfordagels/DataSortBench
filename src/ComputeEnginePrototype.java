@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class ComputeEnginePrototype implements ComputeEngineStorageSystem{
@@ -12,21 +13,33 @@ public class ComputeEnginePrototype implements ComputeEngineStorageSystem{
 		
 		//receive data from compute engine
 		//key is associated with sorted data
-		cess.retreiveSortedData(key);
+		//cess.retreiveSortedData(key);
 	}
 
 
 
-	@Override
-	public char[] retreiveSortedData(UUID key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public UUID sendData(InputConfig userData) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+	@Override
+	public char[] retreiveCharArr(UUID key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public ArrayList<char[]> retreiveCharAl(UUID key) throws IOException {
+		return null;
+		// TODO Auto-generated method stub
+		
 	}
 
  
