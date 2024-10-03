@@ -24,7 +24,7 @@ public class ComputeEngine{
 	}
 	
 	public static ArrayList<char[]> readFile(InputConfig fileName) {
-		
+		return null;
 	}
 	
 	
