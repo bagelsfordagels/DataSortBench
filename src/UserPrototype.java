@@ -19,7 +19,7 @@
 //
 //	}
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -45,7 +45,8 @@ public class UserPrototype implements DataStorageSystem{
 	    }
 
 		@Override
-		public void recieveData(UUID key) {
+		public ArrayList<Integer> recieveData(UUID key) {
 	        InputConfig storedData = dataStore.get(key);
+	        return null;
 	    }
 	}
