@@ -32,8 +32,10 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 		UUID fileKey = dss.sendData(file);
 		ArrayList<Integer> userInts = dss.recieveData(fileKey);
 		ArrayList<char[]> charAl = cpe.readFile(userInts);
+		dss.mkFile(charAl);
+		//File userFile = userFile(charAl);
 		
-		userFile(charAl);
+		System.out.println("A file with the information was created called UserData");
 		
 		return charAl;
 	}

@@ -8,19 +8,17 @@ public class TestComputeEngineStorage{
 	
 	@Test
 	public void test() throws IOException{
-		ComputeEngineStorageImplementation testCEImplementation = new ComputeEngineStorageImplementation();
+		ComputeEngineStorageSystem testCEImplementation = new ComputeEngineStorageImplementation();
 		
-		char[] arr = {'a','b'};
-		UUID key = UUID.randomUUID();
-		InputConfig i = new IntegerInputConfig(1);
-		if (testCEImplementation.sendData(i) != key) {
-			Assertions.fail();
-		}
+
+		InputConfig i = new IntegerInputConfig(4);
+		UUID key = testCEImplementation.sendData(i);
+		char[] testArr = testCEImplementation.retreiveCharArr(key);
 		
+		// check if testArr length is correct
+		Assertions.assertEquals(testArr.length, 4);
 		
-		if(testCEImplementation.retreiveCharArr(key).length != arr.length) {
-			Assertions.fail();
-		}
+
 	}
 	
 }
