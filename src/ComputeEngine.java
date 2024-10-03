@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -22,7 +23,7 @@ public class ComputeEngine{
         return randomArr;
 	}
 	
-	public static void readFile(InputConfig fileName) {
+	public static ArrayList<char[]> readFile(InputConfig fileName) {
 		
 	}
 	

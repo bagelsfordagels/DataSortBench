@@ -11,7 +11,7 @@ public class UserInterface{
 		String line = null;
 
 		Scanner userData = new Scanner(System.in);
-		System.out.println("If you would like to enter an integer enter 1/nif you would like to enter a file enter 2:");
+		System.out.println("Enter 1 for Integers or 2 for a FileName:");
 		
 		int userChoice = userData.nextInt();
 ////		do {
@@ -41,6 +41,9 @@ public class UserInterface{
 			for(int i = 0; i < sortedArr.length; i++) {
 				System.out.print(sortedArr[i] + " ");
 			}
+			userData.close();
+			return;
+			
 		}
 		if(userChoice == 2) {
 			System.out.println("Enter the file name: ");
@@ -59,7 +62,6 @@ public class UserInterface{
 			
 			UUID key = css.sendData(userFileInputConfig);
 			css.retreiveSortedData(key);
-			
 		} else {
 			System.out.println("Incorrect input");
 		}
