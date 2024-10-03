@@ -1,7 +1,8 @@
+import java.io.IOException;
 import java.util.UUID;
 
 public class ComputeEnginePrototype implements ComputeEngineStorageSystem{
-	public void prototype(ComputeEngineStorageSystem cess) {
+	public void prototype(ComputeEngineStorageSystem cess) throws IOException {
 		//send data to compute engine
 		//test to compile
 		char[] arr = {'a','b'};
