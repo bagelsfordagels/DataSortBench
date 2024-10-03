@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 		}
 	}
 	
-	public File userFile(ArrayList<char[]> charAl) {
+	public File userFile(ArrayList<char[]> charAl) throws IOException{
 		DataStorageSystem dss = new DataStorageImplementation();
 		File userFile = dss.mkFile(charAl);
 		return userFile;
