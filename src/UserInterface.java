@@ -1,9 +1,7 @@
-import java.util.InputMismatchException;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 public class UserInterface{
 	public static void main(String[] args) throws IOException{
 		
@@ -32,23 +30,24 @@ public class UserInterface{
 			InputConfig userInputConfig = new IntegerInputConfig((Integer.parseInt(userInput))); 
 			
 			
-			
 			UUID key = css.sendData(userInputConfig);
-			char[] sortedArr = css.retreiveSortedData(key);
+			char[] sortedArr = css.retreiveCharArr(key);
 			
 			for(int i = 0; i < sortedArr.length; i++) {
 				System.out.print(sortedArr[i] + " ");
 			}
 			userData.close();
-			return;
-			
+			return;	
 		}
 		if(userChoice == 2) {
 			System.out.println("Enter the file name: ");
 			String fileName = userData.next();
 			InputConfig userFileInputConfig = new FileInputConfig(fileName);
 			UUID key = css.sendData(userFileInputConfig);
-			css.retreiveSortedData(key);
+			ArrayList<char[]> userCharAl = css.retreiveCharAl(key);
+			for(char[] arr : userCharAl) {
+				System.out.println(arr);
+			}
 		} else {
 			System.out.println("Incorrect input");
 		}
