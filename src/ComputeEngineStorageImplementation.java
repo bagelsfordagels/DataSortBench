@@ -26,8 +26,9 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 		if(dataStore.get(key) instanceof FileInputConfig) {
 			InputConfig file = dataStore.get(key);
 			DataStorageSystem dss = new DataStorageImplementation();
+			ComputeEngine cpe = new ComputeEngine();
 			dss.sendData(file);
-			ComputeEngine.readFile(file);
+			cpe.readFile(file);
 			// just for compiling
 			// not sure what it should be returning 
 			char[] c = {'c','c','c'};
