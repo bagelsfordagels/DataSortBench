@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +17,7 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 		return userKey;
 	}
 
-	public char[] retreiveSortedData(UUID key) {
+	public char[] retreiveSortedData(UUID key) throws IOException{
 		// retrieves user entered integer from map
 		// if user enters integer
 		if(dataStore.get(key) instanceof IntegerInputConfig) {
@@ -30,7 +32,8 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 			ComputeEngine cpe = new ComputeEngine();
 			UUID fileKey = dss.sendData(file);
 			ArrayList<Integer> userInts = dss.recieveData(fileKey);
-			cpe.readFile(userInts);
+			ArrayList<char[]> charAl = cpe.readFile(userInts);
+			userFile(charAl);
 			// just for compiling
 			// not sure what it should be returning 
 			char[] c = {'c','c','c'};
@@ -39,8 +42,13 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 		} else {
 			return null;
 		}
+	}
+	
+	public File userFile(ArrayList<char[]> charAl) throws IOException{
+		DataStorageSystem dss = new DataStorageImplementation();
+		File userFile = dss.mkFile(charAl);
+		return userFile;
 		
-
 	}
 
 }

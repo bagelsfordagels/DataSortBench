@@ -19,6 +19,8 @@
 //
 //	}
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,4 +51,10 @@ public class UserPrototype implements DataStorageSystem{
 	        InputConfig storedData = dataStore.get(key);
 	        return null;
 	    }
+
+		@Override
+		public File mkFile(ArrayList<char[]> charAl) throws IOException {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	}

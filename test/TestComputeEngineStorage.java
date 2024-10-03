@@ -1,5 +1,6 @@
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.io.IOException;
 import java.util.UUID;
 
 import org.junit.Assert;
@@ -9,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class TestComputeEngineStorage{
 	
 	@Test
-	public void test(){
+	public void test() throws IOException{
 		ComputeEngineStorageImplementation testCEImplementation = new ComputeEngineStorageImplementation();
 		
 		char[] arr = {'a','b'};

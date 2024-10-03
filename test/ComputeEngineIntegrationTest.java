@@ -12,6 +12,7 @@
 //	}
 //	
 //}
+import java.io.IOException;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Assertions;
@@ -20,7 +21,7 @@ import org.junit.jupiter.api.Test;
 public class ComputeEngineIntegrationTest implements InputConfig, OutputConfig{
 
     @Test
-    public void testComputeEngine() {
+    public void testComputeEngine() throws IOException {
     	UserPrototype user = new UserPrototype();
     	InputConfig userData =  new IntegerInputConfig(1);
     	InputConfig userData1 =  new IntegerInputConfig(10);
