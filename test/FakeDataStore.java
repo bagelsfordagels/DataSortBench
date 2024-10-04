@@ -23,18 +23,8 @@ public class FakeDataStore implements DataStorageSystem{
 		testOutput.add('w');
 		TestInputConfig inputConfig = new TestInputConfig(7);
 		OutputConfigTest outputConfig = new OutputConfigTest(testOutput);
-		DataStorageImplementation dataStore = new DataStorageImplementation();
-		//tests if the input List are empty
-		if(inputConfig.getUserData() != 7) {
-			System.out.println("Input list is empty");
-			Assertions.fail();
-		}
-		
-		//tests if the output List is empty
-		if(outputConfig.getOutputData().size() != 4) {
-			System.out.println("Output List is Empty");
-			Assertions.fail();
-		}
+		Assertions.assertEquals(inputConfig.getUserData(), 7);
+		Assertions.assertEquals(outputConfig.getOutputData().size(), 4);
 	}
 	@Override
 	public UUID sendData(InputConfig userdata) {
