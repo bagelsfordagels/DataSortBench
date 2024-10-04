@@ -6,7 +6,7 @@ public class OutputConfigTest implements OutputConfig{
 		testOutput = sortedArr;
 	}
 	public List<char[]> outputData = new ArrayList<>();
-	public List<char[]> getOutputData(){
-			return outputData;
+	public ArrayList<Character> getOutputData(){
+			return testOutput;
 	}
 }
