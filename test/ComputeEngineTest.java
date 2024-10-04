@@ -1,10 +1,6 @@
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.util.ArrayList;
-import java.util.UUID;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 public class ComputeEngineTest{
 	@Test
@@ -16,8 +12,8 @@ public class ComputeEngineTest{
 		ArrayList<char[]> sortedFileArr = testComputeEngine.readFile(testArr);
 		Assertions.assertEquals(sortedFileArr.size(),2);
 		
-		InputConfig testFile = new FileInputConfig("TestFile");
-		char[] sortedArr = testComputeEngine.mkArr(testFile);
+		InputConfig test = new IntegerInputConfig(3);
+		char[] sortedArr = testComputeEngine.mkArr(test);
 		Assertions.assertEquals(sortedArr.length, 3);
 	}
 }
