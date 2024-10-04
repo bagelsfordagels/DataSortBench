@@ -1,8 +1,10 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
 
 
-public class FakeDataStore extends DataStorageImplementation{
+public class FakeDataStore implements DataStorageSystem{
 	public UUID sendData(int userData) {
 		return null;
 	}
@@ -10,38 +12,33 @@ public class FakeDataStore extends DataStorageImplementation{
 		return null;
 	}
 	public boolean testDataStore() {
-		TestInputConfig inputConfig = new TestInputConfig();
-		OutputConfigTest outputConfig = new OutputConfigTest();
-		int incount = 0;
-		int outcount = 0;
+		ArrayList<Character> testOutput = new ArrayList<>();
+		testOutput.add('a');
+		testOutput.add('c');
+		testOutput.add('g');
+		testOutput.add('w');
+		TestInputConfig inputConfig = new TestInputConfig(7);
+		OutputConfigTest outputConfig = new OutputConfigTest(testOutput);
+		DataStorageImplementation dataStore = new DataStorageImplementation();
 		//tests if the input List are empty
-		if(inputConfig.getUserData() == 0) {
+		if(inputConfig.getUserData() != 7) {
 			System.out.println("Input list is empty");
-			return false;
+			Assertions.fail();
 		}
 		//tests if the output List is empty
-		if(outputConfig.getOutputData().size() == 0) {
+		if(outputConfig.getOutputData().size() = 4) {
 			System.out.println("Output List is Empty");
-			return false;
+			Assertions.fail();
 		}
-		//runs through the input list to make sure it can be read
-		for(int i=0;i<inputConfig.getUserData();i++) {
-			incount++;
-		}
-		if(inputConfig.getUserData() == incount) {
-			return true;
-		}
-		//runs through the output list to make sure that it can be read
-		for(int i=0;i<outputConfig.getOutputData().size();i++) {
-			outcount++;
-		}
-		if(outputConfig.getOutputData().size() == outcount) {
-			return true;
-		}
-		return false;
 	}
 	@Override
 	public UUID sendData(InputConfig userdata) {
+		// TODO Auto-generated method stub
+		return null;
+		
+	}
+	@Override
+	public File mkFile(ArrayList<char[]> charAl) throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
