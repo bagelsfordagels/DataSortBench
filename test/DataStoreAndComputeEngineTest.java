@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class DataStoreAndComputeEngineTest{
 	@Test
-	public void DSandCESmokeTest(){
+	public void dSandCESmokeTest(){
 		DataStorageSystem testDSImplementation = new DataStorageImplementation();
 		ComputeEngine testComputeEngine = new ComputeEngine();
 		InputConfig testFile = new FileInputConfig("TestFile");
