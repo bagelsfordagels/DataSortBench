@@ -27,7 +27,7 @@ public class FakeDataStore implements DataStorageSystem{
 		//tests if the input List are empty
 		if(inputConfig.getUserData() != 7) {
 			System.out.println("Input list is empty");
-			Assertions.();
+			Assertions.fail();
 		}
 		
 		//tests if the output List is empty
