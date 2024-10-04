@@ -18,7 +18,7 @@ import java.util.UUID;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class ComputeEngineIntegrationTest implements InputConfig, OutputConfig{
+public class ComputeEngineIntegrationTest{
 
     @Test
     public void testComputeEngine() throws IOException {
@@ -27,11 +27,9 @@ public class ComputeEngineIntegrationTest implements InputConfig, OutputConfig{
     	InputConfig userData1 =  new IntegerInputConfig(10);
     	InputConfig userData2 =  new IntegerInputConfig(20);
     	
-    	UUID key = user.sendData(userData);
-    	UUID key1 = user.sendData(userData1);
-    	UUID key2 = user.sendData(userData2);
     	
-        ComputeEngineStorageImplementation computeEngine = new ComputeEngineStorageImplementation();
+    	
+        ComputeEngineStorageSystem computeEngine = new ComputeEngineStorageImplementation();
 
 
         // Trigger computation
@@ -44,29 +42,14 @@ public class ComputeEngineIntegrationTest implements InputConfig, OutputConfig{
         char[] resultData1 = computeEngine.retreiveCharArr(userKey1);
         char[] resultData2 = computeEngine.retreiveCharArr(userKey2);
         
-        char[] correctArr = {'h','g','l'};
-        if(resultData != correctArr) {
-        	Assertions.fail();
-        }
-        if(resultData1 != correctArr) {
-        	Assertions.fail();
-        }
-        if(resultData2 != correctArr) {
-        	Assertions.fail();
-        }
+        
+        Assertions.assertEquals(resultData.length, 1);
+        Assertions.assertEquals(resultData1.length, 10);
+        Assertions.assertEquals(resultData2.length, 20);
+      
+      
 
     }
 
-	@Override
-	public int getUserData() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public String getUserFileData() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
 
