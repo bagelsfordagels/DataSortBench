@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 
 public class FakeDataStore implements DataStorageSystem{
@@ -13,6 +14,7 @@ public class FakeDataStore implements DataStorageSystem{
 	public ArrayList<Integer> recieveData(UUID key) {
 		return null;
 	}
+	@Test
 	public void testDataStore() {
 		ArrayList<Character> testOutput = new ArrayList<>();
 		testOutput.add('a');
@@ -25,7 +27,7 @@ public class FakeDataStore implements DataStorageSystem{
 		//tests if the input List are empty
 		if(inputConfig.getUserData() != 7) {
 			System.out.println("Input list is empty");
-			Assertions.fail();
+			Assertions.();
 		}
 		
 		//tests if the output List is empty
