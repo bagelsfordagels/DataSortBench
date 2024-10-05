@@ -55,11 +55,9 @@ public class DataStorageImplementation implements DataStorageSystem{
         UUID key = UUID.randomUUID();
         try {
         	dataStore.put(key, userData);
-        }
-        catch(IllegalArgumentException e){
+        }catch(IllegalArgumentException e){
         	throw new IllegalArgumentException("Invalid InputConfig: " +userData);
-        }
-        catch(Exception e) {
+        }catch(Exception e) {
         	throw new Exception("Error Storing data in dataStore" +e);
         }
         return key;
@@ -80,8 +78,7 @@ public class DataStorageImplementation implements DataStorageSystem{
 		//catching possible errors while reading the file (Ex: File not found)
 		}catch(IOException e){
 			System.out.println("Error while reading file");
-		}
-        catch(IllegalArgumentException e){
+		}catch(IllegalArgumentException e){
 			throw new IllegalArgumentException("Invalid key: "+ key,e);
 		}
 		return userInts;
@@ -105,8 +102,7 @@ public class DataStorageImplementation implements DataStorageSystem{
 	        writer.close();
 		}catch(IOException e) {
 			System.out.println("Error while writing file");
-		}
-		catch(IllegalArgumentException e){
+		}catch(IllegalArgumentException e){
 			throw new IllegalArgumentException("Invalid ArrayList: "+ charAl,e);
 		}
 		
