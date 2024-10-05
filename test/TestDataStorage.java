@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class TestDataStorage{
 	
 	@Test
-	public void test() {
+	public void test() throws Exception {
 		DataStorageSystem testDSImplementation = new DataStorageImplementation();
 		
 		InputConfig testFile = new FileInputConfig("TestFile");
