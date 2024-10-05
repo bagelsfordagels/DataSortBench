@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class DataStoreAndComputeEngineTest{
 	//checks to make sure that the amount of char[] is the same as the amount of integers in the file
 	@Test
-	public void arrayConversionTest(){
+	public void arrayConversionTest() throws Exception{
 		DataStorageSystem testDSImplementation = new DataStorageImplementation();
 		ComputeEngine testComputeEngine = new ComputeEngine();
 		InputConfig testFile = new FileInputConfig("TestFile");

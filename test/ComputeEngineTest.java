@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 public class ComputeEngineTest{
 	@Test
-	public void computeEngineTest() {
+	public void computeEngineTest() throws Exception {
 		ComputeEngine testComputeEngine = new ComputeEngine();
 		ArrayList<Integer> testArr = new ArrayList<>();
 		testArr.add(3);
