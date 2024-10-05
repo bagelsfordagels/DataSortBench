@@ -1,9 +1,8 @@
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
 public class UserInterface{
-	public static void main(String[] args) throws IOException{
+	public static void main(String[] args) throws Exception{
 		
 
 		Scanner userData = new Scanner(System.in);

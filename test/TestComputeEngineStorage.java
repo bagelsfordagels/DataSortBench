@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Assertions;
@@ -7,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class TestComputeEngineStorage{
 	
 	@Test
-	public void test() throws IOException{
+	public void test() throws Exception{
 		ComputeEngineStorageSystem testCEImplementation = new ComputeEngineStorageImplementation();
 		
 

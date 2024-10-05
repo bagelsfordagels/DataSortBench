@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public interface ComputeEngineStorageSystem {
-	UUID sendData(InputConfig userData);
-	char[] retreiveCharArr(UUID key);
-	ArrayList<char[]> retreiveCharAl(UUID key) throws IOException;
+	UUID sendData(InputConfig userData) throws Exception;
+	char[] retreiveCharArr(UUID key) throws Exception;
+	ArrayList<char[]> retreiveCharAl(UUID key) throws IOException, Exception;
 	
 }
