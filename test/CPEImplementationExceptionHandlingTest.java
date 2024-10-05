@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class CPEImplementationExceptionHandlingTest{
 	@Test
-	public void RetreivecharrArrTest() throws Exception {
+	public void retreivecharrArrTest() throws Exception {
 		
 		ComputeEngineStorageSystem cssTest = new ComputeEngineStorageImplementation();
 		UUID invalidKey = UUID.randomUUID(); // key that does not exist in dataStore
@@ -19,7 +19,7 @@ public class CPEImplementationExceptionHandlingTest{
 		}
 	}
 	@Test
-	public void RetreiveCharAlTest() throws Exception{
+	public void retreiveCharAlTest() throws Exception{
 
 		ComputeEngineStorageSystem cssTest = new ComputeEngineStorageImplementation();
 		
@@ -32,7 +32,7 @@ public class CPEImplementationExceptionHandlingTest{
 		}
 	}
 	@Test
-	public void UserFileTest() throws Exception{
+	public void userFileTest() throws Exception{
 		
 		ComputeEngineStorageSystem cssTest = new ComputeEngineStorageImplementation();
 		
