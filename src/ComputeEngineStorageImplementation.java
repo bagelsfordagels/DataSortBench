@@ -11,33 +11,68 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 	
 	private Map<UUID, InputConfig> dataStore = new HashMap<>();
 	// puts user entered integer into map and links it to random key
-	public UUID sendData(InputConfig userData) {
+	public UUID sendData(InputConfig userData) throws Exception {
+		if (userData == null) {
+			throw new IllegalArgumentException("User entry cannot be null");
+		}
 		UUID userKey = UUID.randomUUID();
-		dataStore.put(userKey,userData);
+		try {
+			dataStore.put(userKey,userData);
+		}catch(Exception e) {
+			throw new Exception("Error storing data " +e);
+		}
 		return userKey;
 	}
 	
 	@Override
-	public char[] retreiveCharArr(UUID key) {
-		InputConfig userInt = dataStore.get(key);
-		char[] arr = ComputeEngine.mkArr(userInt);
-		return arr;
+	public char[] retreiveCharArr(UUID key) throws Exception {
+		if(key == null) {
+			throw new IllegalArgumentException("key cannot be null");
+		}
+		try {
+			InputConfig userInt = dataStore.get(key);
+			char[] arr = ComputeEngine.mkArr(userInt);
+			return arr;
+			
+		}catch(IllegalArgumentException e) {
+			throw new IllegalArgumentException("Invalid key: "+key, e);
+			
+		}catch(Exception e) {
+			throw new RuntimeException("Error retrieving data for key: "+key, e);
+		}
+		
+
 	}
 
 	@Override
-	public ArrayList<char[]> retreiveCharAl(UUID key) throws IOException {
-		InputConfig file = dataStore.get(key);
+	public ArrayList<char[]> retreiveCharAl(UUID key) throws IOException{
 		DataStorageSystem dss = new DataStorageImplementation();
 		ComputeEngine cpe = new ComputeEngine();
-		UUID fileKey = dss.sendData(file);
-		ArrayList<Integer> userInts = dss.recieveData(fileKey);
-		ArrayList<char[]> charAl = cpe.readFile(userInts);
-		dss.mkFile(charAl);
+		if(key == null) {
+			throw new IllegalArgumentException("Key cannot be null");
+		}
+		try {
+			InputConfig file = dataStore.get(key);
+			UUID fileKey = dss.sendData(file);
+			ArrayList<Integer> userInts = dss.recieveData(fileKey);
+			ArrayList<char[]> charAl = cpe.readFile(userInts);
+			dss.mkFile(charAl);
+			System.out.println("A file with the information was created called UserData");
+			return charAl;
+			
+		}catch(IllegalArgumentException e) {
+			throw new IllegalArgumentException("Invalid key: "+key, e);
+		}catch(Exception e) {
+			throw new RuntimeException("Error retrieving data for key: "+key, e);
+		}
+		
+		
+		
+		
 		//File userFile = userFile(charAl);
 		
-		System.out.println("A file with the information was created called UserData");
+	
 		
-		return charAl;
 	}
 	
 	
@@ -71,9 +106,17 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 	
 	
 	public File userFile(ArrayList<char[]> charAl) throws IOException{
-		DataStorageSystem dss = new DataStorageImplementation();
-		File userFile = dss.mkFile(charAl);
-		return userFile;
+		if(charAl == null) {
+			throw new IllegalArgumentException("ArrayList cannot be null");
+		}
+		try {
+			DataStorageSystem dss = new DataStorageImplementation();
+			File userFile = dss.mkFile(charAl);
+			return userFile;
+		}catch(Exception e) {
+			throw new RuntimeException("error creating file");
+		}
+		
 		
 	}
 

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class ComputeEnginePrototype implements ComputeEngineStorageSystem{
-	public void prototype(ComputeEngineStorageSystem cess) throws IOException {
+	public void prototype(ComputeEngineStorageSystem cess) throws Exception {
 		//send data to compute engine
 		//test to compile
 		char[] arr = {'a','b'};
