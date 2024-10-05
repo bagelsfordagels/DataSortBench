@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -40,6 +41,15 @@ public class ComputeEnginePrototype implements ComputeEngineStorageSystem{
 		return null;
 		// TODO Auto-generated method stub
 		
+	}
+
+
+
+
+	@Override
+	public File userFile(ArrayList<char[]> al) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
  
