@@ -22,21 +22,35 @@ public class UserInterface{
 		
 		ComputeEngineStorageSystem css = new ComputeEngineStorageImplementation();
 		if(userChoice == 1) {
+			String userInput = "";
 			System.out.println("please enter an integer: ");
 			
-			String userInput = userData.next();
-			
-			InputConfig userInputConfig = new IntegerInputConfig((Integer.parseInt(userInput))); 
-			
-			
-			UUID key = css.sendData(userInputConfig);
-			char[] sortedArr = css.retreiveCharArr(key);
-			
-			for(int i = 0; i < sortedArr.length; i++) {
-				System.out.print(sortedArr[i] + " ");
+			boolean validInput = false;
+			while(validInput == false) {
+				userInput = userData.next();
+			try {
+				InputConfig userInputConfig = new IntegerInputConfig((Integer.parseInt(userInput))); 
+				if(userInputConfig.getUserData() > 0) {
+					validInput = true;
+					UUID key = css.sendData(userInputConfig);
+					char[] sortedArr = css.retreiveCharArr(key);
+					
+					System.out.println("Here is a randomized and sorted char array with length " +userInputConfig.getUserData());
+					for(int i = 0; i < sortedArr.length; i++) {
+						System.out.print(sortedArr[i] + " ");
+					}
+					userData.close();
+					return;	
+				}else {
+					System.out.println("Please enter an integer greater than zero");
+					
+				}		
+			}catch(NumberFormatException e) {
+				throw new IllegalArgumentException("Please enter a value larger than zero: " + e.getMessage());
 			}
-			userData.close();
-			return;	
+			}
+
+			
 		}
 		if(userChoice == 2) {
 			System.out.println("Enter the file name: ");
