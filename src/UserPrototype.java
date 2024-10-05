@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class UserPrototype implements DataStorageSystem{
-	    public void prototype(DataStorageSystem dss) {
+	    public void prototype(DataStorageSystem dss) throws Exception {
 	        // Send data to data storage system
 	        InputConfig data = new IntegerInputConfig(1);
 	        UUID key = dss.sendData(data);

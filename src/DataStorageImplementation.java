@@ -48,13 +48,25 @@ public class DataStorageImplementation implements DataStorageSystem{
 	
 	private Map<UUID, InputConfig> dataStore = new HashMap<>();
 
-	public UUID sendData(InputConfig userData) {
+	public UUID sendData(InputConfig userData) throws Exception{
+		if(userData == null) {
+			throw new IllegalArgumentException("User data cannot be null");
+		}
         UUID key = UUID.randomUUID();
-        dataStore.put(key, userData);
+        try {
+        	dataStore.put(key, userData);
+        }catch(IllegalArgumentException e){
+        	throw new IllegalArgumentException("Invalid InputConfig: " +userData);
+        }catch(Exception e) {
+        	throw new Exception("Error Storing data in dataStore" +e);
+        }
         return key;
     }
 
-	public ArrayList<Integer> recieveData(UUID key) {
+	public ArrayList<Integer> recieveData(UUID key) throws Exception{
+		if(key == null) {
+			throw new IllegalArgumentException("key can't be null");
+		}
 		ArrayList<Integer> userInts = new ArrayList<>();
         InputConfig fileName = dataStore.get(key);
         try(FileReader in = new FileReader(fileName.getUserFileData() +".txt")){
@@ -66,12 +78,16 @@ public class DataStorageImplementation implements DataStorageSystem{
 		//catching possible errors while reading the file (Ex: File not found)
 		}catch(IOException e){
 			System.out.println("Error while reading file");
+		}catch(IllegalArgumentException e){
+			throw new IllegalArgumentException("Invalid key: "+ key,e);
 		}
-        
 		return userInts;
     }
 	
 	public File mkFile(ArrayList<char[]> charAl) throws IOException{
+		if(charAl == null) {
+			throw new IllegalArgumentException("ArrayList<char[] can't be null");
+		}
 		File userFile = new File("UserData.txt");
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter("UserData.txt"));
@@ -86,6 +102,8 @@ public class DataStorageImplementation implements DataStorageSystem{
 	        writer.close();
 		}catch(IOException e) {
 			System.out.println("Error while writing file");
+		}catch(IllegalArgumentException e){
+			throw new IllegalArgumentException("Invalid ArrayList: "+ charAl,e);
 		}
 		
 		return userFile;
