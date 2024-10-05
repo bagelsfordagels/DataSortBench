@@ -106,7 +106,7 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 	
 	
 	public File userFile(ArrayList<char[]> charAl) throws IOException{
-		if(charAl == null) {
+		if(charAl.isEmpty()) {
 			throw new IllegalArgumentException("ArrayList cannot be null");
 		}
 		try {
