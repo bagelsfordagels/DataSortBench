@@ -24,6 +24,8 @@ public class TestMultiUser {
 		//TODO 2: create an instance of your coordinator component; this is the component
 		// that the user will make requests to
 		// Store it in the 'coordinator' instance variable
+		coordinator = new ComputeEngineStorageImplementation();
+		
 	}
 
 	@Test
@@ -53,7 +55,14 @@ public class TestMultiUser {
 			multiThreadedOut.deleteOnExit();
 			String multiThreadOutputPath = multiThreadedOut.getCanonicalPath();
 			TestUser testUser = testUsers.get(i);
-			results.add(threadPool.submit(() -> testUser.run(multiThreadOutputPath)));
+			results.add(threadPool.submit(() -> {
+				try {
+					testUser.run(multiThreadOutputPath);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}));
 		}
 		
 		results.forEach(future -> {
