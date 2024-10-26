@@ -28,16 +28,10 @@ public class ComputeEnginePrototype implements ComputeEngineStorageSystem{
 
 
 
-	@Override
-	public char[] retreiveCharArr(UUID key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 
 	@Override
-	public ArrayList<char[]> retreiveCharAl(UUID key) throws IOException {
+	public ArrayList<char[]> retrieveCharAl(UUID key) throws IOException {
 		return null;
 		// TODO Auto-generated method stub
 		
@@ -48,6 +42,15 @@ public class ComputeEnginePrototype implements ComputeEngineStorageSystem{
 
 	@Override
 	public File userFile(ArrayList<char[]> al) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+	@Override
+	public char[] retrieveCharArr(UUID key) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -12,7 +12,7 @@ public class TestComputeEngineStorage{
 
 		InputConfig i = new IntegerInputConfig(4);
 		UUID key = testCEImplementation.sendData(i);
-		char[] testArr = testCEImplementation.retreiveCharArr(key);
+		char[] testArr = testCEImplementation.retrieveCharArr(key);
 		
 		// check if testArr length is correct
 		Assertions.assertEquals(testArr.length, 4);

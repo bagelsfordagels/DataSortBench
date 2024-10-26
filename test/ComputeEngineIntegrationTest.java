@@ -37,9 +37,9 @@ public class ComputeEngineIntegrationTest{
         UUID userKey2 = computeEngine.sendData(userData2);
 
         // Retrieve output data
-        char[] resultData = computeEngine.retreiveCharArr(userKey);
-        char[] resultData1 = computeEngine.retreiveCharArr(userKey1);
-        char[] resultData2 = computeEngine.retreiveCharArr(userKey2);
+        char[] resultData = computeEngine.retrieveCharArr(userKey);
+        char[] resultData1 = computeEngine.retrieveCharArr(userKey1);
+        char[] resultData2 = computeEngine.retrieveCharArr(userKey2);
         
         
         Assertions.assertEquals(resultData.length, 1);

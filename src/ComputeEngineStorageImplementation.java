@@ -4,10 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class ComputeEngineStorageImplementation implements ComputeEngineStorageSystem{
 	int userData;
 	char[] sortedData;
+	private final ExecutorService executorService = Executors.newFixedThreadPool(4);
 	
 	private Map<UUID, InputConfig> dataStore = new HashMap<>();
 	// puts user entered integer into map and links it to random key
@@ -25,33 +31,40 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 	}
 	
 	@Override
-	public char[] retreiveCharArr(UUID key) throws Exception {
-		if(key == null) {
-			throw new IllegalArgumentException("key cannot be null");
-		}
-		try {
-			InputConfig userInt = dataStore.get(key);
-			char[] arr = ComputeEngine.mkArr(userInt);
-			return arr;
-			
-		}catch(IllegalArgumentException e) {
-			throw new IllegalArgumentException("Invalid key: "+key, e);
-			
-		}catch(Exception e) {
-			throw new RuntimeException("Error retrieving data for key: "+key, e);
-		}
-		
+	public char[] retrieveCharArr(UUID key) throws Exception {
+        if (key == null) {
+            throw new IllegalArgumentException("key cannot be null");
+        }
 
-	}
+        Callable<char[]> task = () -> {
+            InputConfig userInt = dataStore.get(key);
+            if (userInt == null) {
+                throw new IllegalArgumentException("Invalid key: " + key);
+            }
+            return ComputeEngine.mkArr(userInt);
+        };
+
+        Future<char[]> future = executorService.submit(task);
+        
+        try {
+            return future.get(); // Waits for the task to complete and retrieves the result
+        } catch (ExecutionException e) {
+            throw new RuntimeException("Error retrieving data for key: " + key, e.getCause());
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Restore interrupted status
+            throw new RuntimeException("Thread was interrupted while retrieving data for key: " + key, e);
+        }
+    }
 
 	@Override
-	public ArrayList<char[]> retreiveCharAl(UUID key) throws IOException{
+	public ArrayList<char[]> retrieveCharAl(UUID key) throws IOException{
 		DataStorageSystem dss = new DataStorageImplementation();
 		ComputeEngine cpe = new ComputeEngine();
 		if(key == null) {
 			throw new IllegalArgumentException("Key cannot be null");
 		}
-		try {
+		
+		Callable<ArrayList<char[]>> task = () -> {
 			InputConfig file = dataStore.get(key);
 			UUID fileKey = dss.sendData(file);
 			ArrayList<Integer> userInts = dss.recieveData(fileKey);
@@ -59,6 +72,11 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 			dss.mkFile(charAl);
 			System.out.println("A file with the information was created called UserData");
 			return charAl;
+		};
+		
+		Future<ArrayList<char[]>> future = executorService.submit(task);
+		try {
+			return future.get();
 			
 		}catch(IllegalArgumentException e) {
 			throw new IllegalArgumentException("Invalid key: "+key, e);
@@ -119,6 +137,8 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 		
 		
 	}
+
+	
 
 	
 
