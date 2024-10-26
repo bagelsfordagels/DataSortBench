@@ -33,7 +33,7 @@ public class UserInterface{
 				if(userInputConfig.getUserData() > 0) {
 					validInput = true;
 					UUID key = css.sendData(userInputConfig);
-					char[] sortedArr = css.retreiveCharArr(key);
+					char[] sortedArr = css.retrieveCharArr(key);
 					
 					System.out.println("Here is a randomized and sorted char array with length " +userInputConfig.getUserData());
 					for(int i = 0; i < sortedArr.length; i++) {
@@ -57,7 +57,7 @@ public class UserInterface{
 			String fileName = userData.next();
 			InputConfig userFileInputConfig = new FileInputConfig(fileName);
 			UUID key = css.sendData(userFileInputConfig);
-			ArrayList<char[]> userCharAl = css.retreiveCharAl(key);
+			ArrayList<char[]> userCharAl = css.retrieveCharAl(key);
 			for(char[] arr : userCharAl) {
 				System.out.println(arr);
 			}

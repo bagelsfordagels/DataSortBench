@@ -12,7 +12,7 @@ public class CPEImplementationExceptionHandlingTest{
 		UUID invalidKey = UUID.randomUUID(); // key that does not exist in dataStore
 		
 		try {
-			cssTest.retreiveCharArr(invalidKey);
+			cssTest.retrieveCharArr(invalidKey);
 			Assertions.fail();
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -25,7 +25,7 @@ public class CPEImplementationExceptionHandlingTest{
 		
 		UUID invalidKey = UUID.randomUUID(); // key that does not exist in dataStore
 		try {
-			cssTest.retreiveCharAl(invalidKey);
+			cssTest.retrieveCharAl(invalidKey);
 			Assertions.fail();
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
