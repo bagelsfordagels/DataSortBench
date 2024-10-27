@@ -104,8 +104,10 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 //		}
 //	}
 	
-	
 	public File userFile(ArrayList<char[]> charAl) throws IOException{
+		  return userFile(charAl, ';', "UserData.txt");
+		}
+	public File userFile(ArrayList<char[]> charAl, char delimiter, String file) throws IOException{
 		if(charAl.isEmpty()) {
 			throw new IllegalArgumentException("ArrayList cannot be null");
 		}

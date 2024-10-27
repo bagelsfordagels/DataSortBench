@@ -22,7 +22,8 @@ public class TestUser {
 		// run the compute job specified by inputPath, outputPath, and delimiter
 		
 		coordinator.sendData(userFileInputConfig);
-		coordinator.userFile(null);
+		coordinator.retreiveCharArr(null);
+		coordinator.retreiveCharAl(null);
 		
 	}
 
