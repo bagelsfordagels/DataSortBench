@@ -12,13 +12,44 @@ public class ComputeEngine{
 	//}
 	
 	public static char[] mkArr(InputConfig userData) throws Exception{
+//		if(userData == null) {
+//			throw new IllegalArgumentException("User data cannot be null");
+//		}
+//		try {
+//			char[] randomArr = new char[userData.getUserData()];
+//			Random random = new Random();
+//			
+//	        for (int i = 0; i < userData.getUserData(); i++) {
+//	            // Generate a random character between 'a' and 'z' (lowercase letters)
+//	            char randomChar = (char) ('a' + random.nextInt(26));
+//	            randomArr[i] = randomChar;
+//	        }
+//	        Arrays.sort(randomArr);
+//	        return randomArr;
+//		}catch(IllegalArgumentException e) {
+//			throw new IllegalArgumentException("Invalid user data" +userData);
+//		}catch(Exception e) {
+//			throw new RuntimeException("Error creating array");
+//		}
+		return mkArr(userData, false);
+		
+	}
+	
+	public static char[] mkArr(InputConfig userData, boolean deterministic) throws Exception{
 		if(userData == null) {
 			throw new IllegalArgumentException("User data cannot be null");
 		}
 		try {
 			char[] randomArr = new char[userData.getUserData()];
-			Random random = new Random();
-
+			Random random;
+			
+			if(deterministic) { // to get a fixed value
+				random = new Random(0); // have random equal zero 
+				
+			} else {
+				random = new Random();
+			}
+			
 	        for (int i = 0; i < userData.getUserData(); i++) {
 	            // Generate a random character between 'a' and 'z' (lowercase letters)
 	            char randomChar = (char) ('a' + random.nextInt(26));
@@ -35,6 +66,10 @@ public class ComputeEngine{
 	}
 	
 	public ArrayList<char[]> readFile(ArrayList<Integer> userInts) throws Exception{
+		return readFile(userInts, false);
+	}
+	
+	public ArrayList<char[]> readFile(ArrayList<Integer> userInts, boolean deterministic) throws Exception{
 		if(userInts == null) {
 			throw new IllegalArgumentException("ArrayList cannot be null");
 		}
@@ -42,7 +77,13 @@ public class ComputeEngine{
 			ArrayList<char[]> listCharArrs = new ArrayList<>();
 			for(int j = 0; j<userInts.size();j++) {
 				char[] randomArr = new char[userInts.get(j)];
-				Random random = new Random();
+				Random random;
+				
+				if(deterministic) { // to get same result
+					random = new Random(0); // fixed seed
+				} else {
+					random = new Random();
+				}
 
 		        for (int i = 0; i < userInts.get(j); i++) {
 		            // Generate a random character between 'a' and 'z' (lowercase letters)
