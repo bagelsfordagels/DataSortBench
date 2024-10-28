@@ -55,6 +55,7 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
             Thread.currentThread().interrupt(); // Restore interrupted status
             throw new RuntimeException("Thread was interrupted while retrieving data for key: " + key, e);
         }
+		
     }
 	
 	public ArrayList<char[]> retrieveCharAl(UUID key, String fileName){
@@ -85,7 +86,7 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 					throw new RuntimeException("Error during readfile" +e);
 				}
 			}
-			dss.mkFile(charAl);
+			dss.mkFile(charAl,fileName);
 
 			System.out.println("A file with the information was created called UserData");
 			return charAl;
