@@ -31,7 +31,7 @@ public class ComputeEngine{
 //		}catch(Exception e) {
 //			throw new RuntimeException("Error creating array");
 //		}
-		return mkArr(userData, false);
+		return mkArr(userData, true);
 		
 	}
 	
@@ -62,16 +62,19 @@ public class ComputeEngine{
 		}catch(Exception e) {
 			throw new RuntimeException("Error creating array");
 		}
-		
+//		char[] s = {'a'};
+//		return s;
 	}
 	
+
 	public char[] readFile(Integer userInt) throws Exception {
-		return readFile(userInt, false);
+		return readFile(userInt, true);
 	}
 	
 	public char[] readFile(Integer userInt, boolean deterministic) throws Exception{
 		
 		// original logic when method took in ArrayList<char[]>
+
 //		if(userInts == null) {
 //			throw new IllegalArgumentException("ArrayList cannot be null");
 //		}
@@ -121,6 +124,7 @@ public class ComputeEngine{
 	    } catch (Exception e) {
 	        throw new RuntimeException("Error creating character array");
 	    }
+
 		
 	}
 	

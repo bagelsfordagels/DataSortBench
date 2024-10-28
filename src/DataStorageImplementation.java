@@ -69,7 +69,7 @@ public class DataStorageImplementation implements DataStorageSystem{
 		}
 		ArrayList<Integer> userInts = new ArrayList<>();
         InputConfig fileName = dataStore.get(key);
-        try(FileReader in = new FileReader(fileName.getUserFileData() +".txt")){
+        try(FileReader in = new FileReader(fileName.getUserFileData())){
 			BufferedReader br = new BufferedReader(in);
 			//grabbing the next line and adding it to line String to store file as a string for FileInputConfig
 			while((line = br.readLine()) != null) {
@@ -83,14 +83,13 @@ public class DataStorageImplementation implements DataStorageSystem{
 		}
 		return userInts;
     }
-	
-	public File mkFile(ArrayList<char[]> charAl) throws IOException{
+	public File mkFile(ArrayList<char[]> charAl, String file) {
 		if(charAl == null) {
 			throw new IllegalArgumentException("ArrayList<char[] can't be null");
 		}
-		File userFile = new File("UserData.txt");
+		File userFile = new File(file);
 		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter("UserData.txt"));
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 			
 	        for (char[] characterArray : charAl) {
 	            for (char character : characterArray) {
@@ -107,5 +106,30 @@ public class DataStorageImplementation implements DataStorageSystem{
 		}
 		
 		return userFile;
+	}
+	public File mkFile(ArrayList<char[]> charAl) throws IOException{
+//		if(charAl == null) {
+//			throw new IllegalArgumentException("ArrayList<char[] can't be null");
+//		}
+//		File userFile = new File("UserData.txt");
+//		try {
+//			BufferedWriter writer = new BufferedWriter(new FileWriter("UserData.txt"));
+//			
+//	        for (char[] characterArray : charAl) {
+//	            for (char character : characterArray) {
+//	                writer.write(character);
+//	            }
+//	            writer.newLine();
+//	        }
+//
+//	        writer.close();
+//		}catch(IOException e) {
+//			System.out.println("Error while writing file");
+//		}catch(IllegalArgumentException e){
+//			throw new IllegalArgumentException("Invalid ArrayList: "+ charAl,e);
+//		}
+//		
+//		return userFile;
+		return mkFile(charAl, "UserData.txt");
 	}
 }

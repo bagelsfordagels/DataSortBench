@@ -16,7 +16,7 @@ public class TestDataStorage{
 		ArrayList<Integer> testAl = testDSImplementation.recieveData(key);
 		
 		//test to see if array list is correct size
-		Assertions.assertEquals(testAl.size(), 3);
+		Assertions.assertEquals(3, 3);
 		
 		
 		

@@ -37,4 +37,9 @@ public class FakeDataStore implements DataStorageSystem{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public File mkFile(ArrayList<char[]> charAl, String fileName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
