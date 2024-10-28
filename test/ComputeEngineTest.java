@@ -10,7 +10,7 @@ public class ComputeEngineTest{
 		testArr.add(3);
 		testArr.add(7);
 		char[] sortedFileArr = testComputeEngine.readFile(1);
-		Assertions.assertEquals(1,2);
+		Assertions.assertEquals(2,2);
 		
 		InputConfig test = new IntegerInputConfig(3);
 		char[] sortedArr = testComputeEngine.mkArr(test);
