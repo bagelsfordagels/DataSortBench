@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.Callable;
@@ -68,7 +69,22 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 			InputConfig file = dataStore.get(key);
 			UUID fileKey = dss.sendData(file);
 			ArrayList<Integer> userInts = dss.recieveData(fileKey);
-			ArrayList<char[]> charAl = cpe.readFile(userInts);
+			
+			List<Future<char[]>> futureList = new ArrayList<>();
+			
+			for(Integer userInt : userInts) {
+				Callable<char[]> readFileTask = () -> cpe.readFile(userInt);
+	            futureList.add(executorService.submit(readFileTask));
+			}
+			
+			ArrayList<char[]> charAl = new ArrayList<>();
+			for(Future<char[]> future : futureList) {
+				try {
+					charAl.add(future.get());
+				} catch(ExecutionException | InterruptedException e){
+					throw new RuntimeException("Error during readfile" +e);
+				}
+			}
 			dss.mkFile(charAl);
 			System.out.println("A file with the information was created called UserData");
 			return charAl;
