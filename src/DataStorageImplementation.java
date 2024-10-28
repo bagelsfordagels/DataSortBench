@@ -69,7 +69,7 @@ public class DataStorageImplementation implements DataStorageSystem{
 		}
 		ArrayList<Integer> userInts = new ArrayList<>();
         InputConfig fileName = dataStore.get(key);
-        try(FileReader in = new FileReader(fileName.getUserFileData() +".txt")){
+        try(FileReader in = new FileReader(fileName.getUserFileData())){
 			BufferedReader br = new BufferedReader(in);
 			//grabbing the next line and adding it to line String to store file as a string for FileInputConfig
 			while((line = br.readLine()) != null) {
