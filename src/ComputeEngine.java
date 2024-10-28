@@ -66,43 +66,53 @@ public class ComputeEngine{
 //		return s;
 	}
 	
-	public ArrayList<char[]> readFile(ArrayList<Integer> userInts) throws Exception{
-		return readFile(userInts, true);
-	}
-	
-	public ArrayList<char[]> readFile(ArrayList<Integer> userInts, boolean deterministic) throws Exception{
-		if(userInts == null) {
-			throw new IllegalArgumentException("ArrayList cannot be null");
-		}
-		try {
-			ArrayList<char[]> listCharArrs = new ArrayList<>();
-			for(int j = 0; j<userInts.size();j++) {
-				char[] randomArr = new char[userInts.get(j)];
-				Random random;
-				
-				if(deterministic) { // to get same result
-					random = new Random(0); // fixed seed
-				} else {
-					random = new Random();
-				}
 
-		        for (int i = 0; i < userInts.get(j); i++) {
-		            // Generate a random character between 'a' and 'z' (lowercase letters)
-		            char randomChar = (char) ('a' + random.nextInt(26));
-		            randomArr[i] = randomChar;
-		        }
-		        Arrays.sort(randomArr);
-		        listCharArrs.add(randomArr);
-			}
-//		ArrayList<char[]> listCharArrs = new ArrayList<>();
-//		char[] s = {'c'};
-//		listCharArrs.add(s);
-			return listCharArrs;
-		}catch(IllegalArgumentException e) {
-			throw new IllegalArgumentException("Invalid ArrayList" +userInts);
-		}catch(Exception e) {
-			throw new RuntimeException("Error creating ArrayList");
-		}
+	public char[] readFile(Integer userInt) throws Exception{
+//		if(userInts == null) {
+//			throw new IllegalArgumentException("ArrayList cannot be null");
+//		}
+//		try {
+//			ArrayList<char[]> listCharArrs = new ArrayList<>();
+//			for(int j = 0; j<userInts.size();j++) {
+//				char[] randomArr = new char[userInts.get(j)];
+//				Random random = new Random();
+//
+//		        for (int i = 0; i < userInts.get(j); i++) {
+//		            // Generate a random character between 'a' and 'z' (lowercase letters)
+//		            char randomChar = (char) ('a' + random.nextInt(26));
+//		            randomArr[i] = randomChar;
+//		        }
+//		        Arrays.sort(randomArr);
+//		        listCharArrs.add(randomArr);
+//			}
+//			return listCharArrs;
+//		}catch(IllegalArgumentException e) {
+//			throw new IllegalArgumentException("Invalid ArrayList" +userInts);
+//		}catch(Exception e) {
+//			throw new RuntimeException("Error creating ArrayList");
+//		}
+		
+		if (userInt <= 0) {
+	        throw new IllegalArgumentException("Input integer must be positive");
+	    }
+	    try {
+	        char[] randomArr = new char[userInt];
+	        Random random = new Random();
+
+
+	        for (int i = 0; i < userInt; i++) {
+	            // Generate a random character between 'a' and 'z' (lowercase letters)
+	            char randomChar = (char) ('a' + random.nextInt(26));
+	            randomArr[i] = randomChar;
+	        }
+	        Arrays.sort(randomArr);
+	        return randomArr;
+	    } catch (IllegalArgumentException e) {
+	        throw new IllegalArgumentException("Invalid integer: " + userInt);
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error creating character array");
+	    }
+
 		
 		
 	}
