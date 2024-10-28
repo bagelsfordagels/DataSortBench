@@ -55,9 +55,8 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
             throw new RuntimeException("Thread was interrupted while retrieving data for key: " + key, e);
         }
     }
-
-	@Override
-	public ArrayList<char[]> retrieveCharAl(UUID key) throws IOException{
+	
+	public ArrayList<char[]> retrieveCharAl(UUID key, String fileName){
 		DataStorageSystem dss = new DataStorageImplementation();
 		ComputeEngine cpe = new ComputeEngine();
 		if(key == null) {
@@ -69,7 +68,7 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 			UUID fileKey = dss.sendData(file);
 			ArrayList<Integer> userInts = dss.recieveData(fileKey);
 			ArrayList<char[]> charAl = cpe.readFile(userInts);
-			dss.mkFile(charAl);
+			dss.mkFile(charAl,fileName);
 			System.out.println("A file with the information was created called UserData");
 			return charAl;
 		};
@@ -83,7 +82,35 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 		}catch(Exception e) {
 			throw new RuntimeException("Error retrieving data for key: "+key, e);
 		}
-		
+	}
+	@Override
+	public ArrayList<char[]> retrieveCharAl(UUID key) throws IOException{
+//		DataStorageSystem dss = new DataStorageImplementation();
+//		ComputeEngine cpe = new ComputeEngine();
+//		if(key == null) {
+//			throw new IllegalArgumentException("Key cannot be null");
+//		}
+//		
+//		Callable<ArrayList<char[]>> task = () -> {
+//			InputConfig file = dataStore.get(key);
+//			UUID fileKey = dss.sendData(file);
+//			ArrayList<Integer> userInts = dss.recieveData(fileKey);
+//			ArrayList<char[]> charAl = cpe.readFile(userInts);
+//			dss.mkFile(charAl);
+//			System.out.println("A file with the information was created called UserData");
+//			return charAl;
+//		};
+//		
+//		Future<ArrayList<char[]>> future = executorService.submit(task);
+//		try {
+//			return future.get();
+//			
+//		}catch(IllegalArgumentException e) {
+//			throw new IllegalArgumentException("Invalid key: "+key, e);
+//		}catch(Exception e) {
+//			throw new RuntimeException("Error retrieving data for key: "+key, e);
+//		}
+		return retrieveCharAl(key,"UserData.txt");
 		
 		
 		

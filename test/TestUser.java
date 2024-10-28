@@ -1,5 +1,6 @@
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.UUID;
 
 
@@ -15,14 +16,16 @@ public class TestUser {
 
 	public void run(String outputPath) throws Exception {
 		char delimiter = ';';
-		String inputPath = "test" + File.separatorChar + "testInputFile.test";
+		String inputPath = "test" + File.separatorChar + "testInputFile.test";//breakpoint
 		InputConfig userFileInputConfig = new FileInputConfig(inputPath);
 		// TODO 4: Call the appropriate method(s) on the coordinator to get it to 
 		// run the compute job specified by inputPath, outputPath, and delimiter
 		
 		coordinator.sendData(userFileInputConfig);
-		coordinator.retrieveCharAl(coordinator.sendData(userFileInputConfig));
-		coordinator.retrieveCharArr(coordinator.sendData(userFileInputConfig));
+		ArrayList<char[]> userCharAl = coordinator.retrieveCharAl(coordinator.sendData(userFileInputConfig),outputPath);
+		for(char[] arr : userCharAl) {
+			System.out.println(arr);
+		}
 		
 	}
 

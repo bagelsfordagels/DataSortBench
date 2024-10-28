@@ -62,11 +62,12 @@ public class ComputeEngine{
 		}catch(Exception e) {
 			throw new RuntimeException("Error creating array");
 		}
-		
+//		char[] s = {'a'};
+//		return s;
 	}
 	
 	public ArrayList<char[]> readFile(ArrayList<Integer> userInts) throws Exception{
-		return readFile(userInts, false);
+		return readFile(userInts, true);
 	}
 	
 	public ArrayList<char[]> readFile(ArrayList<Integer> userInts, boolean deterministic) throws Exception{
@@ -93,6 +94,9 @@ public class ComputeEngine{
 		        Arrays.sort(randomArr);
 		        listCharArrs.add(randomArr);
 			}
+//		ArrayList<char[]> listCharArrs = new ArrayList<>();
+//		char[] s = {'c'};
+//		listCharArrs.add(s);
 			return listCharArrs;
 		}catch(IllegalArgumentException e) {
 			throw new IllegalArgumentException("Invalid ArrayList" +userInts);

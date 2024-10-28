@@ -7,5 +7,6 @@ public interface DataStorageSystem {
 	public UUID sendData(InputConfig userdata) throws Exception;
 	public ArrayList<Integer> recieveData(UUID key) throws Exception;
 	public File mkFile(ArrayList<char[]> charAl) throws IOException;
+	public File mkFile(ArrayList<char[]> charAl, String fileName);
 }
 
