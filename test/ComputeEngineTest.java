@@ -9,8 +9,8 @@ public class ComputeEngineTest{
 		ArrayList<Integer> testArr = new ArrayList<>();
 		testArr.add(3);
 		testArr.add(7);
-		ArrayList<char[]> sortedFileArr = testComputeEngine.readFile(testArr);
-		Assertions.assertEquals(sortedFileArr.size(),2);
+		char[] sortedFileArr = testComputeEngine.readFile(1);
+		Assertions.assertEquals(1,2);
 		
 		InputConfig test = new IntegerInputConfig(3);
 		char[] sortedArr = testComputeEngine.mkArr(test);

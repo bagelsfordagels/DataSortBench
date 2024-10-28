@@ -13,7 +13,7 @@ public class DataStoreAndComputeEngineTest{
 		InputConfig testFile = new FileInputConfig("TestFile");
 		UUID key = testDSImplementation.sendData(testFile);
 		ArrayList<Integer> testAl = testDSImplementation.recieveData(key);
-		ArrayList<char[]> sortedFileArr = testComputeEngine.readFile(testAl);
-		Assertions.assertEquals(sortedFileArr.size(),testAl.size());
+		char[] sortedFileArr = testComputeEngine.readFile(1);
+		Assertions.assertEquals(sortedFileArr.length,testAl.size());
 	}
 }
