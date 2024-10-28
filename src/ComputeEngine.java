@@ -67,7 +67,14 @@ public class ComputeEngine{
 	}
 	
 
-	public char[] readFile(Integer userInt) throws Exception{
+	public char[] readFile(Integer userInt) throws Exception {
+		return readFile(userInt, false);
+	}
+	
+	public char[] readFile(Integer userInt, boolean deterministic) throws Exception{
+		
+		// original logic when method took in ArrayList<char[]>
+
 //		if(userInts == null) {
 //			throw new IllegalArgumentException("ArrayList cannot be null");
 //		}
@@ -97,7 +104,12 @@ public class ComputeEngine{
 	    }
 	    try {
 	        char[] randomArr = new char[userInt];
-	        Random random = new Random();
+	        Random random;
+	        if(deterministic) {
+	        	random = new Random(0);
+	        } else {
+	        	random = new Random();
+	        }
 
 
 	        for (int i = 0; i < userInt; i++) {
@@ -113,7 +125,6 @@ public class ComputeEngine{
 	        throw new RuntimeException("Error creating character array");
 	    }
 
-		
 		
 	}
 	
