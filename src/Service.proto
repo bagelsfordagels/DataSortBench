@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option java_package = "com.example.grpc";
+option java_outer_classname = "ComputeEngineServiceProto";
+
+// Define the service
+service ComputeEngineStorageService {
+    // RPC to send data
+    rpc SendData (SendDataRequest) returns (SendDataResponse);
+    
+    // RPC to retrieve sorted character array
+    rpc RetrieveCharArr (RetrieveCharArrRequest) returns (RetrieveCharArrResponse);
+
+    // RPC to retrieve list of character arrays
+    rpc RetrieveCharAl (RetrieveCharAlRequest) returns (RetrieveCharAlResponse);
+}
+
+// Define request and response messages
+message SendDataRequest {
+    oneof input {
+        int32 userData = 1;
+        string fileName = 2;
+    }
+}
+
+message SendDataResponse {
+    string key = 1;
+}
+
+message RetrieveCharArrRequest {
+    string key = 1;
+}
+
+message RetrieveCharArrResponse {
+    repeated char sortedArr = 1;
+}
+
+message RetrieveCharAlRequest {
+    string key = 1;
+}
+
+message RetrieveCharAlResponse {
+    repeated bytes charArrays = 1; // Using bytes for char arrays
+}
