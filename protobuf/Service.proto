@@ -32,7 +32,7 @@ message RetrieveCharArrRequest {
 }
 
 message RetrieveCharArrResponse {
-    repeated char sortedArr = 1;
+    repeated string sortedArr = 1; // Changed to string for compatibility
 }
 
 message RetrieveCharAlRequest {
@@ -40,5 +40,5 @@ message RetrieveCharAlRequest {
 }
 
 message RetrieveCharAlResponse {
-    repeated bytes charArrays = 1; // Using bytes for char arrays
+    repeated string charArrays = 1; // Using repeated string instead of bytes for simplicity
 }
