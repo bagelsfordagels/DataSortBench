@@ -1,0 +1,24 @@
+service DataStorageImplementationService{
+	rpc SendData (DSSendDataRequest) returns (DSSendDataResponse);
+	rpc RecieveData (DSRecieveDataRequest) returns (DSRecieveDataResponse);
+	rpc MkFile (MkFileRequest) returns (MkFileResponse);
+}
+message DSSendDataRequest{
+	optional string FileInput = 1;
+	optional int32 IntInput = 2;
+}
+message DSSendDataResponse{
+	optional string key = 1;
+}
+message DSRecieveDataRequest{
+	optional string key = 1;
+}
+message DSRecieveDataResponse{
+	optional string IntArrays = 1;
+}
+message MkFileRequest{
+	optional string CharArrays = 1;
+}
+message MkFileResponse{
+	optional string File = 1;
+}
