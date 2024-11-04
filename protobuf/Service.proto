@@ -1,44 +1,33 @@
 syntax = "proto3";
 
 option java_package = "com.example.grpc";
-option java_outer_classname = "ComputeEngineServiceProto";
+option java_outer_classname = "ComputeProto";
 
-// Define the service
-service ComputeEngineStorageService {
-    // RPC to send data
-    rpc SendData (SendDataRequest) returns (SendDataResponse);
-    
-    // RPC to retrieve sorted character array
-    rpc RetrieveCharArr (RetrieveCharArrRequest) returns (RetrieveCharArrResponse);
-
-    // RPC to retrieve list of character arrays
-    rpc RetrieveCharAl (RetrieveCharAlRequest) returns (RetrieveCharAlResponse);
+service ComputeService {
+    rpc SendData (InputConfig) returns (UUIDResponse);
+    rpc RetrieveCharArr (UUIDRequest) returns (CharArrayResponse);
+    rpc RetrieveCharAl (UUIDRequest) returns (CharArrayListResponse);
 }
 
-// Define request and response messages
-message SendDataRequest {
-    oneof input {
-        int32 userData = 1;
-        string fileName = 2;
+message InputConfig {
+    oneof config {
+        int32 integerInput = 1;
+        string fileInput = 2;
     }
 }
 
-message SendDataResponse {
-    string key = 1;
+message UUIDRequest {
+    string uuid = 1;
 }
 
-message RetrieveCharArrRequest {
-    string key = 1;
+message UUIDResponse {
+    string uuid = 1;
 }
 
-message RetrieveCharArrResponse {
-    repeated string sortedArr = 1; // Changed to string for compatibility
+message CharArrayResponse {
+    repeated string charArray = 1;
 }
 
-message RetrieveCharAlRequest {
-    string key = 1;
-}
-
-message RetrieveCharAlResponse {
-    repeated string charArrays = 1; // Using repeated string instead of bytes for simplicity
+message CharArrayListResponse {
+    repeated CharArrayResponse charArrayList = 1;
 }
