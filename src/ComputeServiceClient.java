@@ -4,16 +4,13 @@ import java.util.Scanner;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-import com.example.grpc.ComputeProto.*;
 import com.example.grpc.ComputeServiceGrpc;
 import com.example.grpc.ComputeServiceGrpc.ComputeServiceBlockingStub;
 
 import io.grpc.Channel;
 import io.grpc.Grpc;
 import io.grpc.InsecureChannelCredentials;
-import io.grpc.ManagedChannel;
-import io.grpc.StatusRuntimeException;
+
 
 
 public class ComputeServiceClient { // Boilerplate TODO: change to <servicename>Client
