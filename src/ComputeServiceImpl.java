@@ -1,7 +1,10 @@
 import java.util.ArrayList;
 import java.util.UUID;
 
-import com.example.grpc.ComputeProto.*;
+import com.example.grpc.ComputeProto.CharArrayListResponse;
+import com.example.grpc.ComputeProto.CharArrayResponse;
+import com.example.grpc.ComputeProto.UUIDRequest;
+import com.example.grpc.ComputeProto.UUIDResponse;
 import com.example.grpc.ComputeServiceGrpc.ComputeServiceImplBase;
 
 import io.grpc.stub.StreamObserver;
