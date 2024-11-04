@@ -11,3 +11,4 @@ test/Extest.java
 .classpath
 FileInputConfig
 .classpath
+.settings/org.eclipse.jdt.core.prefs
