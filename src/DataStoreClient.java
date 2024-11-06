@@ -23,7 +23,7 @@ public class DataStoreClient { // Boilerplate TODO: change to <servicename>Clien
     }
 
     // Boilerplate TODO: replace this method with actual client call/response logic
-    public String Order() { 
+    public String order() { 
     	DSSendDataRequest request = DSSendDataRequest.newBuilder().build();
         DSSendDataResponse response;
         try {
@@ -63,7 +63,7 @@ public class DataStoreClient { // Boilerplate TODO: change to <servicename>Clien
                 .build();
         try {
             DataStoreClient client = new DataStoreClient(channel); // Boilerplate TODO: update to this class name
-            client.Order();
+            client.order();
         } finally {
             channel.shutdownNow().awaitTermination(5, TimeUnit.SECONDS);
         }

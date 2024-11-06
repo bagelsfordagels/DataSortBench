@@ -34,9 +34,9 @@ public class DataStoreServiceImpl extends DataStorageImplementationServiceImplBa
 
     public void recieveData(UUIDRequest request, StreamObserver<CharArrayResponse> responseObserver) {
         try {
-            ArrayList<Integer> IntAl = dss.recieveData(UUID.fromString(request.getUuid()));
+            ArrayList<Integer> intAl = dss.recieveData(UUID.fromString(request.getUuid()));
             CharArrayResponse.Builder responseBuilder = CharArrayResponse.newBuilder();
-            for (int i : IntAl) {
+            for (int i : intAl) {
                 responseBuilder.addCharArray(String.valueOf(i));
             }
             responseObserver.onNext(responseBuilder.build());
