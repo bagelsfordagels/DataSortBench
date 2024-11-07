@@ -44,8 +44,7 @@ public UUID sendData(InputConfig userdata) throws Exception {
 		}
 		String stringResponse = response.toString();
 		return UUID.fromString(stringResponse);
-	}
-	else {
+	}else {
 		String stringFile = "";
 		BufferedReader br = new BufferedReader(new FileReader(userdata.getUserFileData()));
 		String line; 
