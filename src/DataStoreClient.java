@@ -42,8 +42,8 @@ public UUID sendData(InputConfig userdata) throws Exception {
 			e.printStackTrace();
 			return null;
 		}
-		String sResponse = response.toString();
-		return UUID.fromString(sResponse);
+		String stringResponse = response.toString();
+		return UUID.fromString(stringResponse);
 	}
 	else {
 		String stringFile = "";
@@ -61,8 +61,8 @@ public UUID sendData(InputConfig userdata) throws Exception {
 	        e.printStackTrace();
 	        return null;
 	    }
-	    String sResponse = response.toString();
-		return UUID.fromString(sResponse);
+	    String stringResponse = response.toString();
+		return UUID.fromString(stringResponse);
 	}
 }
 
@@ -77,10 +77,10 @@ public ArrayList<Integer> recieveData(UUID key) throws Exception {
         e.printStackTrace();
         return null;
     }
-    String sResponse = response.toString();
+    String stringResponse = response.toString();
     ArrayList<Integer> intAl = new ArrayList<>();
-    for(int i = 0; i < sResponse.length(); i++) {
-    	int x = (sResponse.charAt(i));
+    for(int i = 0; i < stringResponse.length(); i++) {
+    	int x = (stringResponse.charAt(i));
     	intAl.add(x);
     }
 	return intAl;
@@ -95,14 +95,14 @@ public File mkFile(ArrayList<char[]> charAl) throws IOException {
 @Override
 public File mkFile(ArrayList<char[]> charAl, String fileName) {
 	// TODO Auto-generated method stub
-	String sInput = "";
+	String stringInput = "";
 	for(int i = 0; i < charAl.size(); i++) {
 		char[] charAr = charAl.get(i);
 		for(int j = 0; j < charAr.length ; j++) {
-			sInput = sInput + charAr[j];
+			stringInput = stringInput + charAr[j];
 		}
 	}
-	MkFileRequest request = MkFileRequest.newBuilder().setCharArrays(sInput).build();
+	MkFileRequest request = MkFileRequest.newBuilder().setCharArrays(stringInput).build();
 	MkFileResponse response;
     try {
         response = blockingStub.mkFile(request);
@@ -110,17 +110,17 @@ public File mkFile(ArrayList<char[]> charAl, String fileName) {
         e.printStackTrace();
         return null;
     }
-    String sResponse = response.toString();
+    String stringResponse = response.toString();
     File userFile = new File(fileName);
 	try {
 		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-        while(sResponse != null) {   
+        while(stringResponse != null) {   
         	for (int i = 0; i < charAl.size(); i++) {
             	char[] charAr = charAl.get(i);
-            	String line = sResponse.substring(0,charAr.length); 	
+            	String line = stringResponse.substring(0,charAr.length); 	
             	writer.write(line);
             	writer.newLine();
-            	sResponse = sResponse.substring(charAr.length);	
+            	stringResponse = stringResponse.substring(charAr.length);	
             }      
         }
         writer.close();
