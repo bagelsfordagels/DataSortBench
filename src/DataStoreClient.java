@@ -1,3 +1,11 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import com.example.grpc.DataStorageImplementationServiceGrpc;
@@ -15,57 +23,158 @@ import io.grpc.InsecureChannelCredentials;
 import io.grpc.ManagedChannel;
 import io.grpc.StatusRuntimeException;
 
-public class DataStoreClient { // Boilerplate TODO: change to <servicename>Client
+public class DataStoreClient implements DataStorageSystem{ // Boilerplate TODO: change to <servicename>Client
     private final DataStorageImplementationServiceBlockingStub blockingStub; // Boilerplate TODO: update to appropriate blocking stub
-
+    DataStorageSystem dss = new DataStorageImplementation();
     public DataStoreClient(Channel channel) {
         blockingStub = DataStorageImplementationServiceGrpc.newBlockingStub(channel);  // Boilerplate TODO: update to appropriate blocking stub
     }
 
-    // Boilerplate TODO: replace this method with actual client call/response logic
-    public String order() { 
-    	DSSendDataRequest request = DSSendDataRequest.newBuilder().build();
-        DSSendDataResponse response;
-        try {
-            response = blockingStub.sendData(request);
-        } catch (StatusRuntimeException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return response.getKey();  
-    }
-//    public String recieveDataOrder() { 
-//    	DSRecieveDataRequest request = DSRecieveDataRequest.newBuilder().build();
-//    	DSRecieveDataResponse response;
-//        try {
-//            response = blockingStub.recieveData(request);
-//        } catch (StatusRuntimeException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//        return response.getIntArrays();
-//    }
-//    public String mkFileOrder() { 
-//    	MkFileRequest request = MkFileRequest.newBuilder().build();
-//    	MkFileResponse response;
-//        try {
-//            response = blockingStub.mkFile(request);
-//        } catch (StatusRuntimeException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//        return response.getFile();
-//    }
-    public static void main(String[] args) throws Exception {
-        String target = "localhost:50073";  // Boilerplate TODO: make sure the server/port match the server/port you want to connect to
-
-        ManagedChannel channel = Grpc.newChannelBuilder(target, InsecureChannelCredentials.create())
-                .build();
-        try {
-            DataStoreClient client = new DataStoreClient(channel); // Boilerplate TODO: update to this class name
-            client.order();
-        } finally {
-            channel.shutdownNow().awaitTermination(5, TimeUnit.SECONDS);
-        }
-    }
+@Override
+public UUID sendData(InputConfig userdata) throws Exception {
+	// TODO Auto-generated method stub
+	if(userdata instanceof IntegerInputConfig) {
+		DSSendDataRequest request = DSSendDataRequest.newBuilder().setIntInput(userdata.getUserData()).build();
+		DSSendDataResponse response;
+		try {
+			response = blockingStub.sendData(request);
+		} catch (StatusRuntimeException e) {
+			e.printStackTrace();
+			return null;
+		}
+		String sResponse = response.toString();
+		return UUID.fromString(sResponse);
+	}
+	else {
+		String stringFile = "";
+		BufferedReader br = new BufferedReader(new FileReader(userdata.getUserFileData()));
+		String line; 
+		while((line = br.readLine()) != null){
+			stringFile = stringFile + line;
+		}
+		br.close();
+		DSSendDataRequest request = DSSendDataRequest.newBuilder().setFileInput(stringFile).build();
+	    DSSendDataResponse response;
+	    try {
+	        response = blockingStub.sendData(request);
+	    } catch (StatusRuntimeException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	    String sResponse = response.toString();
+		return UUID.fromString(sResponse);
+	}
 }
+
+@Override
+public ArrayList<Integer> recieveData(UUID key) throws Exception {
+	// TODO Auto-generated method stub
+	DSRecieveDataRequest request = DSRecieveDataRequest.newBuilder().setKey(key.toString()).build();
+	DSRecieveDataResponse response;
+    try {
+        response = blockingStub.recieveData(request);
+    } catch (StatusRuntimeException e) {
+        e.printStackTrace();
+        return null;
+    }
+    String sResponse = response.toString();
+    ArrayList<Integer> intAl = new ArrayList<>();
+    for(int i = 0; i < sResponse.length(); i++) {
+    	int x = (sResponse.charAt(i));
+    	intAl.add(x);
+    }
+	return intAl;
+}
+
+@Override
+public File mkFile(ArrayList<char[]> charAl) throws IOException {
+	// TODO Auto-generated method stub
+	return mkFile(charAl,"UserData.txt");
+}
+
+@Override
+public File mkFile(ArrayList<char[]> charAl, String fileName) {
+	// TODO Auto-generated method stub
+	String sInput = "";
+	for(int i = 0; i < charAl.size(); i++) {
+		char[] charAr = charAl.get(i);
+		for(int j = 0; j < charAr.length ; j++) {
+			sInput = sInput + charAr[j];
+		}
+	}
+	MkFileRequest request = MkFileRequest.newBuilder().setCharArrays(sInput).build();
+	MkFileResponse response;
+    try {
+        response = blockingStub.mkFile(request);
+    } catch (StatusRuntimeException e) {
+        e.printStackTrace();
+        return null;
+    }
+    String sResponse = response.toString();
+    File userFile = new File(fileName);
+	try {
+		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+        while(sResponse != null) {   
+        	for (int i = 0; i < charAl.size(); i++) {
+            	char[] charAr = charAl.get(i);
+            	String line = sResponse.substring(0,charAr.length); 	
+            	writer.write(line);
+            	writer.newLine();
+            	sResponse = sResponse.substring(charAr.length);	
+            }      
+        }
+        writer.close();
+	}catch(IOException e) {
+		System.out.println("Error while writing file");
+	}
+	return userFile;
+	}
+}
+// Boilerplate TODO: replace this method with actual client call/response logic
+//public String sendDataOrder() { 
+//	DSSendDataRequest request = DSSendDataRequest.newBuilder().build();
+//  DSSendDataResponse response;
+//  try {
+//      response = blockingStub.sendData(request);
+//  } catch (StatusRuntimeException e) {
+//      e.printStackTrace();
+//      return null;
+//  }
+//  return response.getKey();  
+//}
+//public String recieveDataOrder() { 
+//	DSRecieveDataRequest request = DSRecieveDataRequest.newBuilder().build();
+//	DSRecieveDataResponse response;
+//  try {
+//      response = blockingStub.recieveData(request);
+//  } catch (StatusRuntimeException e) {
+//      e.printStackTrace();
+//      return null;
+//  }
+//  return response.getIntArrays();
+//}
+//public String mkFileOrder() { 
+//	MkFileRequest request = MkFileRequest.newBuilder().build();
+//	MkFileResponse response;
+//  try {
+//      response = blockingStub.mkFile(request);
+//  } catch (StatusRuntimeException e) {
+//      e.printStackTrace();
+//      return null;
+//  }
+//  return response.getFile();
+//}
+//public static void main(String[] args) throws Exception {
+//  String target = "localhost:61073";  // Boilerplate TODO: make sure the server/port match the server/port you want to connect to
+//
+//  ManagedChannel channel = Grpc.newChannelBuilder(target, InsecureChannelCredentials.create())
+//          .build();
+//  try {
+//      DataStoreClient client = new DataStoreClient(channel); // Boilerplate TODO: update to this class name
+//      client.sendDataOrder();
+//      client.recieveDataOrder();
+//      client.mkFileOrder();
+//  } finally {
+//      channel.shutdownNow().awaitTermination(5, TimeUnit.SECONDS);
+//  }
+//}
