@@ -59,7 +59,7 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
     }
 	
 	public ArrayList<char[]> retrieveCharAl(UUID key, String fileName){
-		DataStorageSystem dss = new DataStorageImplementation();
+		DataStorageSystem dss = new DSImpOptimization();
 		ComputeEngine cpe = new ComputeEngine();
 		if(key == null) {
 			throw new IllegalArgumentException("Key cannot be null");
