@@ -1,6 +1,6 @@
 //import org.junit.Test;
 //
-//public class ComputeEngineIntegrationTest{
+public class ComputeEngineIntegrationTest{
 //
 //	
 //	ComputeEnginePrototype CEP = new ComputeEnginePrototype();
@@ -17,12 +17,7 @@ import java.util.UUID;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import junit.framework.Assert;
 
-public class ComputeEngineIntegrationTest{
-
-//    @Test
-//    public void testComputeEngine() throws Exception {
 //    	UserPrototype user = new UserPrototype();
 //    	InputConfig userData =  new IntegerInputConfig(1);
 //    	InputConfig userData1 =  new IntegerInputConfig(10);
@@ -47,6 +42,7 @@ public class ComputeEngineIntegrationTest{
 //        Assertions.assertEquals(resultData.length, 1);
 //        Assertions.assertEquals(resultData1.length, 10);
 //        Assertions.assertEquals(resultData2.length, 20);
+
 //      
 //      
 //
@@ -85,6 +81,21 @@ public class ComputeEngineIntegrationTest{
 		
 		
 	}
+
+//    	String target = "localhost:50051";  // Boilerplate TODO: make sure the server/port match the server/port you want to connect to
+//
+//        ManagedChannel channel = Grpc.newChannelBuilder(target, InsecureChannelCredentials.create())
+//                .build();
+//    	
+//    	ComputeServiceClient csc = new ComputeServiceClient(channel);
+//    	csc.order();
+    	
+    	
+      
+      
+
+    }
+
 
 }
 
