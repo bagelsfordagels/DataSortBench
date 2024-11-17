@@ -21,11 +21,11 @@ public class DSSBenchmarkTest{
 		
 		ArrayList<char[]> charAl = new ArrayList<>();
 		for(int i = 0; i < 10000; i++) {
-			char[] cArr = new char[100];
+			char[] charArr = new char[100];
 			for(int j = 0; j < 100; j++) {
-				cArr[j] = 'a';
+				charArr[j] = 'a';
 			}
-			charAl.add(cArr);
+			charAl.add(charArr);
 		}
 		long timeStart = System.currentTimeMillis();
 		for (int i = 0; i < NUM_RUNS; i++) {
