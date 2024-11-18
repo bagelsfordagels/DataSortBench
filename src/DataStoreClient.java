@@ -46,12 +46,12 @@ public UUID sendData(InputConfig userdata) throws Exception {
 		return UUID.fromString(stringResponse);
 	}else {
 		String stringFile = "";
-		BufferedReader br = new BufferedReader(new FileReader(userdata.getUserFileData()));
-		String line; 
-		while((line = br.readLine()) != null){
-			stringFile = stringFile + line;
+		try (BufferedReader br = new BufferedReader(new FileReader(userdata.getUserFileData()))) {
+			String line; 
+			while((line = br.readLine()) != null){
+				stringFile = stringFile + line;
+			}
 		}
-		br.close();
 		DSSendDataRequest request = DSSendDataRequest.newBuilder().setFileInput(stringFile).build();
 	    DSSendDataResponse response;
 	    try {
@@ -94,14 +94,16 @@ public File mkFile(ArrayList<char[]> charAl) throws IOException {
 @Override
 public File mkFile(ArrayList<char[]> charAl, String fileName) {
 	// TODO Auto-generated method stub
-	String stringInput = "";
+	MkFileRequest request = MkFileRequest.newBuilder().build();
 	for(int i = 0; i < charAl.size(); i++) {
+		String stringInput = "";
 		char[] charAr = charAl.get(i);
 		for(int j = 0; j < charAr.length ; j++) {
 			stringInput = stringInput + charAr[j];
 		}
+		request.toBuilder().setCharArrays(i,stringInput).build();
 	}
-	MkFileRequest request = MkFileRequest.newBuilder().setCharArrays(stringInput).build();
+	
 	MkFileResponse response;
     try {
         response = blockingStub.mkFile(request);
