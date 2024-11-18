@@ -29,8 +29,8 @@ public class DataStoreServiceImpl extends DataStorageImplementationServiceImplBa
     public void sendData(com.example.grpc.DataStore.DSSendDataRequest request,
             io.grpc.stub.StreamObserver<com.example.grpc.DataStore.DSSendDataResponse> responseObserver) {
         try {
-        	String sRequest = request.toString();
-        	InputConfig requestIC = new FileInputConfig(sRequest);
+        	String strRequest = request.toString();
+        	InputConfig requestIC = new FileInputConfig(strRequest);
             UUID key = dss.sendData(requestIC);
             DSSendDataResponse response = DSSendDataResponse.newBuilder().setKey(key.toString()).build();
             responseObserver.onNext(response);
@@ -49,9 +49,9 @@ public class DataStoreServiceImpl extends DataStorageImplementationServiceImplBa
             for (int i : intAl) {
                 responseBuilder.addCharArray(String.valueOf(i));
             }
-            String sResponse = "";
+            String strResponse = "";
             for(int i = 0; i < intAl.size(); i++) {
-            	sResponse = sResponse + intAl.get(i);
+            	strResponse = strResponse + intAl.get(i);
             }
             DSRecieveDataResponse response = DSRecieveDataResponse.newBuilder().setIntArrays(sResponse).build();
             responseObserver.onNext(response);
