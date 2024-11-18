@@ -23,7 +23,7 @@ public class DataStoreServiceImpl extends DataStorageImplementationServiceImplBa
     private final DataStorageSystem dss;
 
     public DataStoreServiceImpl() {
-        this.dss = new DataStorageImplementation();
+        this.dss = new DSImpOptimization();
     }
     @Override
     public void sendData(com.example.grpc.DataStore.DSSendDataRequest request,
