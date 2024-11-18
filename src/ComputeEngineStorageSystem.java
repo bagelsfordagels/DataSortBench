@@ -5,6 +5,7 @@ import java.util.UUID;
 
 public interface ComputeEngineStorageSystem {
 	UUID sendData(InputConfig userData) throws Exception;
+	ArrayList<char[]> retrieveCharAl(UUID key, String fileName) throws IOException, Exception;
 	ArrayList<char[]> retrieveCharAl(UUID key) throws IOException, Exception;
 	File userFile(ArrayList<char[]> al) throws IOException;
 	char[] retrieveCharArr(UUID key) throws Exception;

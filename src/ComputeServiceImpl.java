@@ -1,11 +1,13 @@
 import java.util.ArrayList;
 import java.util.UUID;
 
-import com.example.grpc.ComputeProto.CharArrayListResponse;
-import com.example.grpc.ComputeProto.CharArrayResponse;
-import com.example.grpc.ComputeProto.UUIDRequest;
-import com.example.grpc.ComputeProto.UUIDResponse;
+
 import com.example.grpc.ComputeServiceGrpc.ComputeServiceImplBase;
+import com.example.grpc.Service.CSRetreiveAlRequest;
+import com.example.grpc.Service.CSRetreiveAlResponse;
+import com.example.grpc.Service.CSRetreiveArrRequest;
+import com.example.grpc.Service.CSRetreiveArrResponse;
+import com.example.grpc.Service.CSSendDataResponse;
 
 import io.grpc.stub.StreamObserver;
 
@@ -17,10 +19,10 @@ public class ComputeServiceImpl extends ComputeServiceImplBase{
         this.css = new ComputeEngineStorageImplementation();
     }
 
-    public void sendData(InputConfig request, StreamObserver<UUIDResponse> responseObserver) {
+    public void sendData(InputConfig request, StreamObserver<CSSendDataResponse> responseObserver) {
         try {
             UUID key = css.sendData(request);
-            UUIDResponse response = UUIDResponse.newBuilder().setUuid(key.toString()).build();
+            CSSendDataResponse response = CSSendDataResponse.newBuilder().setUuid(key.toString()).build();
             responseObserver.onNext(response);
             responseObserver.onCompleted();
         } catch (Exception e) {
@@ -28,12 +30,12 @@ public class ComputeServiceImpl extends ComputeServiceImplBase{
         }
     }
 
-    public void retrieveCharArr(UUIDRequest request, StreamObserver<CharArrayResponse> responseObserver) {
+    public void retrieveCharArr(CSRetreiveArrRequest request, StreamObserver<CSRetreiveArrResponse> responseObserver) {
         try {
             char[] charArray = css.retrieveCharArr(UUID.fromString(request.getUuid()));
-            CharArrayResponse.Builder responseBuilder = CharArrayResponse.newBuilder();
+            CSRetreiveArrResponse.Builder responseBuilder = CSRetreiveArrResponse.newBuilder();
             for (char c : charArray) {
-                responseBuilder.addCharArray(String.valueOf(c));
+                responseBuilder.setCharArray(String.valueOf(c));
             }
             responseObserver.onNext(responseBuilder.build());
             responseObserver.onCompleted();
@@ -42,16 +44,16 @@ public class ComputeServiceImpl extends ComputeServiceImplBase{
         }
     }
 
-    public void retrieveCharAl(UUIDRequest request, StreamObserver<CharArrayListResponse> responseObserver) {
+    public void retrieveCharAl(CSRetreiveAlRequest request, StreamObserver<CSRetreiveAlResponse> responseObserver) {
         try {
             ArrayList<char[]> charAl = css.retrieveCharAl(UUID.fromString(request.getUuid()));
-            CharArrayListResponse.Builder responseBuilder = CharArrayListResponse.newBuilder();
+            CSRetreiveAlResponse.Builder responseBuilder = CSRetreiveAlResponse.newBuilder();
             for (char[] arr : charAl) {
-                CharArrayResponse.Builder charArrayResponseBuilder = CharArrayResponse.newBuilder();
+            	CSRetreiveAlResponse.Builder charAlResponseBuilder = CSRetreiveAlResponse.newBuilder();
                 for (char c : arr) {
-                    charArrayResponseBuilder.addCharArray(String.valueOf(c));
+                    charAlResponseBuilder.setCharArrays(String.valueOf(c));
                 }
-                responseBuilder.addCharArrayList(charArrayResponseBuilder.build());
+                //responseBuilder.setCharArr(charAlResponseBuilder.build());
             }
             responseObserver.onNext(responseBuilder.build());
             responseObserver.onCompleted();

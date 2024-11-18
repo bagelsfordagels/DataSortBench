@@ -1,33 +1,35 @@
-syntax = "proto3";
 
 option java_package = "com.example.grpc";
-option java_outer_classname = "ComputeProto";
 
 service ComputeService {
-    rpc SendData (InputConfig) returns (UUIDResponse);
-    rpc RetrieveCharArr (UUIDRequest) returns (CharArrayResponse);
-    rpc RetrieveCharAl (UUIDRequest) returns (CharArrayListResponse);
+    rpc SendData (CSSendDataRequest) returns (CSSendDataResponse);
+    rpc RetrieveCharArr (CSRetreiveArrRequest) returns (CSRetreiveArrResponse);
+    rpc RetrieveCharAl (CSRetreiveAlRequest) returns (CSRetreiveAlResponse);
 }
 
-message InputConfig {
-    oneof config {
-        int32 integerInput = 1;
-        string fileInput = 2;
-    }
+
+message CSSendDataRequest {
+	optional string userData = 1;
+	optional int32 intInput = 2;
 }
 
-message UUIDRequest {
-    string uuid = 1;
+message CSSendDataResponse {
+	optional string uuid = 1;
 }
 
-message UUIDResponse {
-    string uuid = 1;
+message CSRetreiveArrRequest {
+	optional string uuid = 1;
 }
 
-message CharArrayResponse {
-    repeated string charArray = 1;
+message CSRetreiveArrResponse {
+	optional string charArray = 1;
 }
 
-message CharArrayListResponse {
-    repeated CharArrayResponse charArrayList = 1;
+message CSRetreiveAlRequest {
+	optional string uuid = 1;
+	optional string fileName = 2;
+}
+
+message CSRetreiveAlResponse {
+	optional string charArrays = 1;
 }

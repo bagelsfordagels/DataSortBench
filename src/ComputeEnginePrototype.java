@@ -55,5 +55,14 @@ public class ComputeEnginePrototype implements ComputeEngineStorageSystem{
 		return null;
 	}
 
+
+
+
+	@Override
+	public ArrayList<char[]> retrieveCharAl(UUID key, String fileName) throws IOException, Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
  
 }
