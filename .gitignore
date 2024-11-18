@@ -27,3 +27,4 @@ FileInputConfig
 .gradle/buildOutputCleanup/outputFiles.bin
 .gradle/file-system.probe
 .settings/org.eclipse.jdt.core.prefs
+UserData.txt

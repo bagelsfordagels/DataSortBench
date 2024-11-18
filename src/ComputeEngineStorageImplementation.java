@@ -63,8 +63,14 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 		
     }
 	
-	public ArrayList<char[]> retrieveCharAl(UUID key, String fileName) throws Exception{
-		String target = "localhost:61073";  // Boilerplate TODO: make sure the server/port match the server/port you want to connect to
+
+	public ArrayList<char[]> retrieveCharAl(UUID key, String fileName){
+		DataStorageSystem dss = new DSImpOptimization();
+		ComputeEngine cpe = new ComputeEngine();
+		if(key == null) {
+			throw new IllegalArgumentException("Key cannot be null");
+		}
+
 		
 		  ManagedChannel channel = Grpc.newChannelBuilder(target, InsecureChannelCredentials.create())
 		          .build();
