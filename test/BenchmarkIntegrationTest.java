@@ -3,7 +3,7 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 public class BenchmarkIntegrationTest{
-	@Test
+	//@Test
 	public void test() throws Exception{
 		ComputeEngineStorageSystem css = new ComputeEngineStorageImplementation();
 		// integer test

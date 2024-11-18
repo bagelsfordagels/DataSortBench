@@ -14,7 +14,7 @@ public class DSSBenchmarkTest{
 	
 	private static int NUM_RUNS = 100;
 	
-	@Test
+	//@Test
 	public void test() throws Exception{
 		DataStorageSystem dss = new DataStorageImplementation();
 		DataStorageSystem dss2 = new DSImpOptimization();

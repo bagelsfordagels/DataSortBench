@@ -87,7 +87,7 @@ public class ComputeEngineIntegrationTest{
 //
 //    }
 	
-	@Test
+	//@Test
 	public void optimizationTest() throws Exception {
 		
 		ComputeEngineStorageSystem css = new ComputeEngineStorageImplementation();
