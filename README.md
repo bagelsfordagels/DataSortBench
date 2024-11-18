@@ -11,5 +11,4 @@ Original - 18
 New - 4
 BenchmarkIntegrationTest - https://github.com/bagelsfordagels/Assignment-1/blob/main/test/BenchmarkIntegrationTest.java
 DSSBenchmarkTest - https://github.com/bagelsfordagels/Assignment-1/blob/main/test/DSSBenchmarkTest.java
-CPEStorageImplOptimizationTest - https://github.com/bagelsfordagels/Assignment-1/blob/main/test/CPEStorageImplOptimizationTest.java
-The mkArr method in the DataStorageSystem was writing each array to the file character by character causing it to be slow. changed the method to instead use the valueOf() method to covert the entire array into a string all at once to be added to the file faster. Also made changes to the future in retreive arr and retreive al methods to make them run slightly faster.
+The mkArr method in the DataStorageSystem was writing each array to the file character by character causing it to be slow. changed the method to instead use the valueOf() method to covert the entire array into a string all at once to be added to the file faster.
