@@ -36,3 +36,7 @@ UserData.txt
 .gradle/file-system.probe
 .settings/org.eclipse.jdt.core.prefs
 UserData.txt
+.gradle/8.6/executionHistory/executionHistory.lock
+.gradle/8.6/fileHashes/fileHashes.bin
+.gradle/8.6/fileHashes/fileHashes.lock
+.gradle/buildOutputCleanup/buildOutputCleanup.lock

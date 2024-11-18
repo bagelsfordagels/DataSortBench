@@ -53,7 +53,7 @@ public class DataStoreServiceImpl extends DataStorageImplementationServiceImplBa
             for(int i = 0; i < intAl.size(); i++) {
             	strResponse = strResponse + intAl.get(i);
             }
-            DSRecieveDataResponse response = DSRecieveDataResponse.newBuilder().setIntArrays(sResponse).build();
+            DSRecieveDataResponse response = DSRecieveDataResponse.newBuilder().setIntArrays(strResponse).build();
             responseObserver.onNext(response);
             responseObserver.onCompleted();
         } catch (Exception e) {
@@ -82,14 +82,14 @@ public class DataStoreServiceImpl extends DataStorageImplementationServiceImplBa
                 	charArrayResponseBuilder.addCharArray(line);
                 	responseBuilder.addCharArrayList(charArrayResponseBuilder.build());
                 }
-            String sResponse = "";
+            String strResponse = "";
             try (BufferedReader br2 = new BufferedReader(new FileReader(userFile))){
             	String line2;
                 while ((line2 = br.readLine()) != null) {
-                	sResponse = sResponse + line2;
+                	strResponse = strResponse + line2;
                 }
             }
-                MkFileResponse response = MkFileResponse.newBuilder().setFile(sResponse).build();
+                MkFileResponse response = MkFileResponse.newBuilder().setFile(strResponse).build();
                 responseObserver.onNext(response);
                 responseObserver.onCompleted();
             } catch (IOException e) {
