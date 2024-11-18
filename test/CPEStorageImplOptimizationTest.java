@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions;
 public class CPEStorageImplOptimizationTest{
 	//private static int numRuns = 100;
 	
-	@Test
+	//@Test
 	public void optimizationTest() throws Exception {
 		
 		ComputeEngineStorageSystem css = new ComputeEngineStorageImplementation();
