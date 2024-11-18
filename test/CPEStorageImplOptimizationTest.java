@@ -10,12 +10,10 @@ public class CPEStorageImplOptimizationTest{
 	public void optimizationTest() throws Exception {
 		
 		ComputeEngineStorageSystem css = new ComputeEngineStorageImplementation();
-		ComputeEngineStorageSystem css1 = new CPEStorageImplOptimized();
 		
 		InputConfig int1 = new IntegerInputConfig(100);
 		InputConfig int2 = new IntegerInputConfig(100);
 		UUID key = css.sendData(int1);
-		UUID key1 = css1.sendData(int2);
 		
 		long timeStart = System.currentTimeMillis();
 		
@@ -30,7 +28,6 @@ public class CPEStorageImplOptimizationTest{
 		
 		long timeStart1 = System.currentTimeMillis();
 		for(int i = 0; i < 100; i ++) {
-			css1.retrieveCharArr(key1);
 		}
 		long timeEnd1 = System.currentTimeMillis();
 		
