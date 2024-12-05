@@ -5,11 +5,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import com.example.grpc.ComputeProto.CharArrayListResponse;
-import com.example.grpc.ComputeProto.CharArrayResponse;
-import com.example.grpc.ComputeProto.UUIDRequest;
-import com.example.grpc.ComputeProto.UUIDResponse;
+
 import com.example.grpc.DataStorageImplementationServiceGrpc.DataStorageImplementationServiceImplBase;
+import com.example.grpc.DataStore.DSRecieveDataRequest;
+import com.example.grpc.DataStore.DSRecieveDataResponse;
+import com.example.grpc.DataStore.DSSendDataResponse;
+import com.example.grpc.DataStore.MkFileResponse;
 
 import io.grpc.stub.StreamObserver;
 
@@ -21,10 +22,10 @@ public class DataStoreServiceImpl extends DataStorageImplementationServiceImplBa
         this.dss = new DataStorageImplementation();
     }
 
-    public void sendData(InputConfig request, StreamObserver<UUIDResponse> responseObserver) {
+    public void sendData(InputConfig request, StreamObserver<DSSendDataResponse> responseObserver) {
         try {
             UUID key = dss.sendData(request);
-            UUIDResponse response = UUIDResponse.newBuilder().setUuid(key.toString()).build();
+            DSSendDataResponse response = DSSendDataResponse.newBuilder().setKey(key.toString()).build();
             responseObserver.onNext(response);
             responseObserver.onCompleted();
         } catch (Exception e) {
@@ -32,12 +33,12 @@ public class DataStoreServiceImpl extends DataStorageImplementationServiceImplBa
         }
     }
 
-    public void recieveData(UUIDRequest request, StreamObserver<CharArrayResponse> responseObserver) {
+    public void recieveData(DSRecieveDataRequest request, StreamObserver<DSRecieveDataResponse> responseObserver) {
         try {
-            ArrayList<Integer> intAl = dss.recieveData(UUID.fromString(request.getUuid()));
-            CharArrayResponse.Builder responseBuilder = CharArrayResponse.newBuilder();
+            ArrayList<Integer> intAl = dss.recieveData(UUID.fromString(request.getKey()));
+            DSRecieveDataResponse.Builder responseBuilder = DSRecieveDataResponse.newBuilder();
             for (int i : intAl) {
-                responseBuilder.addCharArray(String.valueOf(i));
+                responseBuilder.setIntArrays(String.valueOf(i));
             }
             responseObserver.onNext(responseBuilder.build());
             responseObserver.onCompleted();
@@ -46,16 +47,16 @@ public class DataStoreServiceImpl extends DataStorageImplementationServiceImplBa
         }
     }
 
-    public void mkFile(ArrayList<char[]> request, StreamObserver<CharArrayListResponse> responseObserver) {
+    public void mkFile(ArrayList<char[]> request, StreamObserver<MkFileResponse> responseObserver) {
         try {
             File userFile = dss.mkFile(request);
-            CharArrayListResponse.Builder responseBuilder = CharArrayListResponse.newBuilder();
+            MkFileResponse.Builder responseBuilder = MkFileResponse.newBuilder();
             try (BufferedReader br = new BufferedReader(new FileReader(userFile))) {
                 String line;
                 while ((line = br.readLine()) != null) {
-                	CharArrayResponse.Builder charArrayResponseBuilder = CharArrayResponse.newBuilder();
-                	charArrayResponseBuilder.addCharArray(line);
-                	responseBuilder.addCharArrayList(charArrayResponseBuilder.build());
+                	MkFileResponse.Builder charArrayResponseBuilder = MkFileResponse.newBuilder();
+                	charArrayResponseBuilder.setFile(line);
+                	responseBuilder.setFile(userFile.getName());
                 }
                 responseObserver.onNext(responseBuilder.build());
                 responseObserver.onCompleted();
