@@ -77,7 +77,8 @@ public class DSImpOptimization implements DataStorageSystem{
 			}
 		//catching possible errors while reading the file (Ex: File not found)
 		}catch(IOException e){
-			System.out.println("Error while reading file");
+			System.out.println("Error while reading file" + e.getMessage());
+			e.printStackTrace();
 		}catch(IllegalArgumentException e){
 			throw new IllegalArgumentException("Invalid key: "+ key,e);
 		}

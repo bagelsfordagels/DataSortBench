@@ -31,5 +31,5 @@ message CSRetreiveAlRequest {
 }
 
 message CSRetreiveAlResponse {
-	optional string charArrays = 1;
+	repeated string charArrays = 1;
 }

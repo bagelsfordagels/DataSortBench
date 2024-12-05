@@ -1,5 +1,4 @@
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import io.grpc.ManagedChannel;
-import io.grpc.StatusRuntimeException;
 
 import com.example.grpc.ComputeServiceGrpc;
 import com.example.grpc.ComputeServiceGrpc.ComputeServiceBlockingStub;
@@ -22,6 +19,8 @@ import com.example.grpc.Service.CSSendDataResponse;
 import io.grpc.Channel;
 import io.grpc.Grpc;
 import io.grpc.InsecureChannelCredentials;
+import io.grpc.ManagedChannel;
+import io.grpc.StatusRuntimeException;
 
 
 
@@ -39,12 +38,12 @@ public class ComputeServiceClient implements ComputeEngineStorageSystem{ // Boil
 		
 		int userChoice = userData.nextInt();
 		
-		 String target = "localhost:50051";  // Boilerplate TODO: make sure the server/port match the server/port you want to connect to
+		 String target = "localhost:50052";  // Boilerplate TODO: make sure the server/port match the server/port you want to connect to
 
 	     ManagedChannel channel = Grpc.newChannelBuilder(target, InsecureChannelCredentials.create())
 	    		 .build();
 
-		ComputeEngineStorageSystem css = new ComputeServiceClient(channel);
+		//ComputeEngineStorageSystem css = new ComputeServiceClient(channel);
 		if(userChoice == 1) {
 			String userInput = "";
 			System.out.println("please enter an integer: ");
@@ -56,8 +55,8 @@ public class ComputeServiceClient implements ComputeEngineStorageSystem{ // Boil
 				InputConfig userInputConfig = new IntegerInputConfig((Integer.parseInt(userInput))); 
 				if(userInputConfig.getUserData() > 0) {
 					validInput = true;
-					UUID key = css.sendData(userInputConfig);
-					char[] sortedArr = css.retrieveCharArr(key);
+					UUID key = sendData(userInputConfig);
+					char[] sortedArr = retrieveCharArr(key);
 					
 					System.out.println("Here is a randomized and sorted char array with length " +userInputConfig.getUserData());
 					for(int i = 0; i < sortedArr.length; i++) {
@@ -80,10 +79,10 @@ public class ComputeServiceClient implements ComputeEngineStorageSystem{ // Boil
 			System.out.println("Enter the file name: ");
 			String fileName = userData.next();
 			InputConfig userFileInputConfig = new FileInputConfig(fileName);
-			UUID key = css.sendData(userFileInputConfig);
-			ArrayList<char[]> userCharAl = css.retrieveCharAl(key);
+			UUID key = sendData(userFileInputConfig);
+			ArrayList<char[]> userCharAl = retrieveCharAl(key);
 			for(char[] arr : userCharAl) {
-				System.out.println(arr);
+				System.out.print(arr);
 			}
 		} else {
 			System.out.println("Incorrect input");
@@ -94,7 +93,7 @@ public class ComputeServiceClient implements ComputeEngineStorageSystem{ // Boil
 	}
 	
     public static void main(String[] args) throws Exception {
-        String target = "localhost:50051";  // Boilerplate TODO: make sure the server/port match the server/port you want to connect to
+        String target = "localhost:50052";  // Boilerplate TODO: make sure the server/port match the server/port you want to connect to
 
         ManagedChannel channel = Grpc.newChannelBuilder(target, InsecureChannelCredentials.create())
                 .build();
@@ -113,30 +112,32 @@ public class ComputeServiceClient implements ComputeEngineStorageSystem{ // Boil
 			CSSendDataResponse response;
 			try {
 				response = blockingStub.sendData(request);
+				
+				if(response.getUuid().isEmpty()) {
+					throw new RuntimeException("Server returned an empty UUID");
+				}
+				return UUID.fromString(response.getUuid());
 			} catch (StatusRuntimeException e) {
-				e.printStackTrace();
-				return null;
+				throw new RuntimeException("Error for integer input" + e);
 			}
-			String stringResponse = response.toString();
-			return UUID.fromString(stringResponse);
+			
 		}else {
-			String file = "";
-			BufferedReader br = new BufferedReader(new FileReader(userData.getUserFileData()));
-			String line; 
-			while((line = br.readLine()) != null){
-				file = file + line;
-			}
-			br.close();
-			CSSendDataRequest request = CSSendDataRequest.newBuilder().setUserData(file).build();
+//			String file = "";
+//			BufferedReader br = new BufferedReader(new FileReader(userData.getUserFileData()));
+//			String line; 
+//			while((line = br.readLine()) != null){
+//				file = file + line;
+//			}
+//			br.close();
+			CSSendDataRequest request = CSSendDataRequest.newBuilder().setUserData(userData.getUserFileData()).build();
 			CSSendDataResponse response;
 		    try {
 		        response = blockingStub.sendData(request);
 		    } catch (StatusRuntimeException e) {
 		        e.printStackTrace();
 		        return null;
-		    }
-		    String stringResponse = response.toString();
-			return UUID.fromString(stringResponse);
+		    }		   
+			return UUID.fromString(response.getUuid());
 		}
 			
 	}
@@ -151,26 +152,34 @@ public class ComputeServiceClient implements ComputeEngineStorageSystem{ // Boil
 			e.printStackTrace();
 			return null;
 		}
-		
-		String stringResponse = response.getCharArrays();
-		
-
-		Scanner reader = new Scanner(new FileReader(fileName));
-	
-		ArrayList<Integer> numOfElements = new ArrayList<>();
-		while(reader.hasNextLine()) {
-			numOfElements.add(reader.nextInt());
-		}
-		reader.close();
+		//System.out.println(response);
 		
 		ArrayList<char[]> charAl = new ArrayList<>();
-		int currentIndex = 0;
 		
-		for(int n : numOfElements) {
-			String substring = stringResponse.substring(currentIndex, numOfElements.get(n));
-			charAl.add(substring.toCharArray());
-			currentIndex += numOfElements.get(n);
+		for(int i = 0; i < response.getCharArraysCount(); i++) {
+			String strResponse = response.getCharArrays(i);
+			char[] arr = strResponse.toCharArray();
+			charAl.add(arr);	
 		}
+
+		
+
+//		Scanner reader = new Scanner(new FileReader(fileName));
+//	
+//		ArrayList<Integer> numOfElements = new ArrayList<>();
+//		while(reader.hasNextLine()) {
+//			numOfElements.add(reader.nextInt());
+//		}
+//		reader.close();
+//		
+//		
+//		int currentIndex = 0;
+//		
+//		for(int n : numOfElements) {
+//			String substring = stringResponse.substring(currentIndex, numOfElements.get(n));
+//			charAl.add(substring.toCharArray());
+//			currentIndex += numOfElements.get(n);
+//		}
 		return charAl;
 	}
 

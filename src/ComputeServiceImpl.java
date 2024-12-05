@@ -7,6 +7,7 @@ import com.example.grpc.Service.CSRetreiveAlRequest;
 import com.example.grpc.Service.CSRetreiveAlResponse;
 import com.example.grpc.Service.CSRetreiveArrRequest;
 import com.example.grpc.Service.CSRetreiveArrResponse;
+import com.example.grpc.Service.CSSendDataRequest;
 import com.example.grpc.Service.CSSendDataResponse;
 
 import io.grpc.stub.StreamObserver;
@@ -18,18 +19,30 @@ public class ComputeServiceImpl extends ComputeServiceImplBase{
     public ComputeServiceImpl() {
         this.css = new ComputeEngineStorageImplementation();
     }
-
-    public void sendData(InputConfig request, StreamObserver<CSSendDataResponse> responseObserver) {
+    @Override
+    public void sendData(CSSendDataRequest request, StreamObserver<CSSendDataResponse> responseObserver) {
         try {
-            UUID key = css.sendData(request);
-            CSSendDataResponse response = CSSendDataResponse.newBuilder().setUuid(key.toString()).build();
-            responseObserver.onNext(response);
-            responseObserver.onCompleted();
+        	if(request.hasIntInput()) {
+        		InputConfig input = new IntegerInputConfig(request.getIntInput());
+                UUID key = css.sendData(input);
+                CSSendDataResponse response = CSSendDataResponse.newBuilder().setUuid(key.toString()).build();
+                responseObserver.onNext(response);
+                responseObserver.onCompleted();
+        	} else {
+        		InputConfig fileInput = new FileInputConfig(request.getUserData());
+        		UUID key = css.sendData(fileInput);  
+        		CSSendDataResponse response = CSSendDataResponse.newBuilder().setUuid(key.toString()).build();
+        		responseObserver.onNext(response);
+                responseObserver.onCompleted();
+        	  }
+//        	String strRequest = request.toString();
+//        	int intRequest = Integer.parseInt(strRequest);
+        	
         } catch (Exception e) {
             responseObserver.onError(e);
         }
     }
-
+    @Override
     public void retrieveCharArr(CSRetreiveArrRequest request, StreamObserver<CSRetreiveArrResponse> responseObserver) {
         try {
             char[] charArray = css.retrieveCharArr(UUID.fromString(request.getUuid()));
@@ -43,7 +56,7 @@ public class ComputeServiceImpl extends ComputeServiceImplBase{
             responseObserver.onError(e);
         }
     }
-
+    @Override
     public void retrieveCharAl(CSRetreiveAlRequest request, StreamObserver<CSRetreiveAlResponse> responseObserver) {
         try {
             ArrayList<char[]> charAl = css.retrieveCharAl(UUID.fromString(request.getUuid()));
@@ -51,9 +64,9 @@ public class ComputeServiceImpl extends ComputeServiceImplBase{
             for (char[] arr : charAl) {
             	CSRetreiveAlResponse.Builder charAlResponseBuilder = CSRetreiveAlResponse.newBuilder();
                 for (char c : arr) {
-                    charAlResponseBuilder.setCharArrays(String.valueOf(c));
+                    charAlResponseBuilder.addCharArrays(String.valueOf(c));
                 }
-                //responseBuilder.setCharArr(charAlResponseBuilder.build());
+                responseBuilder.addCharArrays(charAlResponseBuilder.toString());
             }
             responseObserver.onNext(responseBuilder.build());
             responseObserver.onCompleted();
@@ -61,4 +74,9 @@ public class ComputeServiceImpl extends ComputeServiceImplBase{
             responseObserver.onError(e);
         }
     }
+    
+  
+
+      
+  
 }
