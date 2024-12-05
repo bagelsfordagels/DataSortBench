@@ -95,7 +95,7 @@ public File mkFile(ArrayList<char[]> charAl) throws IOException {
 public File mkFile(ArrayList<char[]> charAl, String fileName) {
 	// TODO Auto-generated method stub
 	MkFileRequest request = MkFileRequest.newBuilder().build();
-	for(int i = 0; i < charAl.size(); i++) {
+	for(int i = 0; i < request.getCharArraysCount(); i++) {
 		String stringInput = "";
 		char[] charAr = charAl.get(i);
 		for(int j = 0; j < charAr.length ; j++) {
@@ -116,7 +116,7 @@ public File mkFile(ArrayList<char[]> charAl, String fileName) {
 	try {
 		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
         while(stringResponse != null) {   
-        	for (int i = 0; i < charAl.size(); i++) {
+        	for (int i = 0; i < request.getCharArraysCount(); i++) {
             	char[] charAr = charAl.get(i);
             	String line = stringResponse.substring(0,charAr.length); 	
             	writer.write(line);

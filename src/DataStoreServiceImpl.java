@@ -65,12 +65,10 @@ public class DataStoreServiceImpl extends DataStorageImplementationServiceImplBa
             io.grpc.stub.StreamObserver<com.example.grpc.DataStore.MkFileResponse> responseObserver) {
         try {
         	ArrayList<char[]> charArrAl = new ArrayList<>();
-        	for(int i = 0; i<request.getSerializedSize(); i++) {
+        	for(int i = 0; i<request.getCharArraysCount(); i++) {
         		String s = request.getCharArrays(i);
         		char[] charArr = new char[s.length()];
-        		for(int j = 0; j < charArr.length; j++) {
-        			charArr[j] = s.charAt(j);
-        		}
+        		charArr = s.toCharArray();
         		charArrAl.add(charArr);
         	}
             File userFile = dss.mkFile(charArrAl);

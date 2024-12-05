@@ -1,38 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry output="build/resources/test" kind="src" path="src/test/resources">
-		<attributes>
-			<attribute name="test" value="true"/>
-			<attribute name="optional" value="true"/>
-			<attribute name="gradle.buildServer" value="true"/>
-			<attribute name="resource" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry output="build/resources/main" kind="src" path="src/main/resources">
-		<attributes>
-			<attribute name="optional" value="true"/>
-			<attribute name="gradle.buildServer" value="true"/>
-			<attribute name="resource" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry excluding="test/resources/|main/resources/" output="build/classes/java/main" kind="src" path="src">
-		<attributes>
-			<attribute name="gradle.buildServer" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry output="build/classes/java/test" kind="src" path="build/generated/sources/annotationProcessor/java/test">
-		<attributes>
-			<attribute name="test" value="true"/>
-			<attribute name="optional" value="true"/>
-			<attribute name="gradle.buildServer" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry output="build/classes/java/main" kind="src" path="build/generated/sources/annotationProcessor/java/main">
-		<attributes>
-			<attribute name="optional" value="true"/>
-			<attribute name="gradle.buildServer" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="output" path="bin/default"/>
 	<classpathentry output="bin/main" kind="src" path="build/generated/source/proto/main/java">
 		<attributes>
