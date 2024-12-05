@@ -42,8 +42,8 @@ public UUID sendData(InputConfig userdata) throws Exception {
 			e.printStackTrace();
 			return null;
 		}
-		String stringResponse = response.toString();
-		return UUID.fromString(stringResponse);
+	//	String stringResponse = response.toString();
+		return UUID.fromString(response.getKey());
 	}else {
 		String stringFile = "";
 		try (BufferedReader br = new BufferedReader(new FileReader(userdata.getUserFileData()))) {
@@ -60,8 +60,8 @@ public UUID sendData(InputConfig userdata) throws Exception {
 	        e.printStackTrace();
 	        return null;
 	    }
-	    String stringResponse = response.toString();
-		return UUID.fromString(stringResponse);
+	    //String stringResponse = response.toString();
+		return UUID.fromString(response.getKey());
 	}
 }
 

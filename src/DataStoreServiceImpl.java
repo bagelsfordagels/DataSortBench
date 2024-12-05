@@ -43,8 +43,8 @@ public class DataStoreServiceImpl extends DataStorageImplementationServiceImplBa
     public void recieveData(com.example.grpc.DataStore.DSRecieveDataRequest request,
             io.grpc.stub.StreamObserver<com.example.grpc.DataStore.DSRecieveDataResponse> responseObserver) {
         try {
-        	String strRequest = request.toString();
-            ArrayList<Integer> intAl = dss.recieveData(UUID.fromString(strRequest));
+        	//String strRequest = request.toString();
+            ArrayList<Integer> intAl = dss.recieveData(UUID.fromString(request.getKey()));
             CharArrayResponse.Builder responseBuilder = CharArrayResponse.newBuilder();
             for (int i : intAl) {
                 responseBuilder.addCharArray(String.valueOf(i));
