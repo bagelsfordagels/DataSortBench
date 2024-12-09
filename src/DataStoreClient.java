@@ -45,14 +45,14 @@ public UUID sendData(InputConfig userdata) throws Exception {
 	//	String stringResponse = response.toString();
 		return UUID.fromString(response.getKey());
 	}else {
-		String stringFile = "";
-		try (BufferedReader br = new BufferedReader(new FileReader(userdata.getUserFileData()))) {
-			String line; 
-			while((line = br.readLine()) != null){
-				stringFile = stringFile + line;
-			}
-		}
-		DSSendDataRequest request = DSSendDataRequest.newBuilder().setFileInput(stringFile).build();
+//		String stringFile = "";
+//		try (BufferedReader br = new BufferedReader(new FileReader(userdata.getUserFileData()))) {
+//			String line; 
+//			while((line = br.readLine()) != null){
+//				stringFile = stringFile + line;
+//			}
+//		}
+		DSSendDataRequest request = DSSendDataRequest.newBuilder().setFileInput(userdata.getUserFileData()).build();
 	    DSSendDataResponse response;
 	    try {
 	        response = blockingStub.sendData(request);
@@ -111,18 +111,23 @@ public File mkFile(ArrayList<char[]> charAl, String fileName) {
         e.printStackTrace();
         return null;
     }
-    String stringResponse = response.toString();
+//    String stringResponse = response.toString();
     File userFile = new File(fileName);
 	try {
 		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-        while(stringResponse != null) {   
-        	for (int i = 0; i < request.getCharArraysCount(); i++) {
-            	char[] charAr = charAl.get(i);
-            	String line = stringResponse.substring(0,charAr.length); 	
-            	writer.write(line);
-            	writer.newLine();
-            	stringResponse = stringResponse.substring(charAr.length);	
-            }      
+		int count = 1;
+        while(count != (response.getFileCount()+1)) {   
+        	String strResponse = response.getFile(count);
+        	writer.write(strResponse);
+        	writer.newLine();
+        	count++;
+//        	for (int i = 0; i < request.getCharArraysCount(); i++) {
+//            	char[] charAr = charAl.get(i);
+//            	String line = stringResponse.substring(0,charAr.length); 	
+//            	writer.write(line);
+//            	writer.newLine();
+//            	stringResponse = stringResponse.substring(charAr.length);	
+//            }      
         }
         writer.close();
 	}catch(IOException e) {

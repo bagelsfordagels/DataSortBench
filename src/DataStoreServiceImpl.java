@@ -11,6 +11,7 @@ import com.example.grpc.DataStorageImplementationServiceGrpc.DataStorageImplemen
 import com.example.grpc.DataStore.DSRecieveDataResponse;
 import com.example.grpc.DataStore.DSSendDataResponse;
 import com.example.grpc.DataStore.MkFileResponse;
+import com.example.grpc.Service.CSRetreiveAlResponse;
 
 import io.grpc.stub.StreamObserver;
 
@@ -25,14 +26,17 @@ public class DataStoreServiceImpl extends DataStorageImplementationServiceImplBa
     public void sendData(com.example.grpc.DataStore.DSSendDataRequest request,
             io.grpc.stub.StreamObserver<com.example.grpc.DataStore.DSSendDataResponse> responseObserver) {
         try {
-        	String strRequest = request.toString();
+        	String strRequest = request.getFileInput();
         	InputConfig requestIC = new FileInputConfig(strRequest);
             UUID key = dss.sendData(requestIC);
             DSSendDataResponse response = DSSendDataResponse.newBuilder().setKey(key.toString()).build();
             responseObserver.onNext(response);
             responseObserver.onCompleted();
         } catch (Exception e) {
-            responseObserver.onError(e);
+        	e.printStackTrace();
+        	DSSendDataResponse response = DSSendDataResponse.newBuilder().setError(e.getMessage()).build();
+    		responseObserver.onNext(response);
+            responseObserver.onCompleted();
         }
     }
     @Override
@@ -53,7 +57,10 @@ public class DataStoreServiceImpl extends DataStorageImplementationServiceImplBa
             responseObserver.onNext(response);
             responseObserver.onCompleted();
         } catch (Exception e) {
-            responseObserver.onError(e);
+        	e.printStackTrace();
+        	DSRecieveDataResponse response = DSRecieveDataResponse.newBuilder().setError(e.getMessage()).build();
+    		responseObserver.onNext(response);
+            responseObserver.onCompleted();
         }
     }
     @Override
@@ -70,13 +77,16 @@ public class DataStoreServiceImpl extends DataStorageImplementationServiceImplBa
             File userFile = dss.mkFile(charArrAl);
             MkFileResponse.Builder responseBuilder = MkFileResponse.newBuilder();
 //            try {
-//            try (BufferedReader br = new BufferedReader(new FileReader(userFile))) {
-//                String line;
-//                while ((line = br.readLine()) != null) {
-//                	MkFileResponse.Builder charArrayResponseBuilder = MkFileResponse.newBuilder();
-//                	charArrayResponseBuilder.setFile(line);
+            try (BufferedReader br = new BufferedReader(new FileReader(userFile))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                	MkFileResponse.Builder charArrayResponseBuilder = MkFileResponse.newBuilder();
+                	charArrayResponseBuilder.addFile(line);
 //                	responseBuilder.setFile(userFile.toString());
-                //}
+                }
+            }catch(Exception e) {
+            	e.printStackTrace();
+            }
 //            String strResponse = "";
 //            try (BufferedReader br2 = new BufferedReader(new FileReader(userFile))){
 //            	String line2;
@@ -84,7 +94,10 @@ public class DataStoreServiceImpl extends DataStorageImplementationServiceImplBa
 //                	strResponse = strResponse + line2;
 //                }
 //            }
-                MkFileResponse response = MkFileResponse.newBuilder().setFile(userFile.toString()).build();
+                MkFileResponse response = MkFileResponse.newBuilder().addFile(request.getCharArrays(0)).build();
+                for(int i = 1; i < request.getCharArraysCount(); i++) {
+                	response.toBuilder().addFile(request.getCharArrays(i));
+                }
                 responseObserver.onNext(response);
                 responseObserver.onCompleted();
 //            } catch (IOException e) {
@@ -93,7 +106,10 @@ public class DataStoreServiceImpl extends DataStorageImplementationServiceImplBa
 //            }
         } catch (Exception e) {
         	System.out.print("In the MkFile for DSImpl");
-            responseObserver.onError(e);
+        	e.printStackTrace();
+        	MkFileResponse response = MkFileResponse.newBuilder().setError(e.getMessage()).build();
+    		responseObserver.onNext(response);
+            responseObserver.onCompleted();
         }
     }
 }

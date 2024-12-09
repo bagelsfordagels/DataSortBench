@@ -10,16 +10,19 @@ message DSSendDataRequest{
 }
 message DSSendDataResponse{
 	optional string key = 1;
+	optional string Error = 2;
 }
 message DSRecieveDataRequest{
 	optional string key = 1;
 }
 message DSRecieveDataResponse{
 	optional string IntArrays = 1;
+	optional string Error = 2;
 }
 message MkFileRequest{
 	repeated string CharArrays = 1;
 }
 message MkFileResponse{
-	optional string File = 1;
+	repeated string File = 1;
+	optional string Error = 2;
 }

@@ -39,7 +39,10 @@ public class ComputeServiceImpl extends ComputeServiceImplBase{
 //        	int intRequest = Integer.parseInt(strRequest);
         	
         } catch (Exception e) {
-            responseObserver.onError(e);
+        	e.printStackTrace();
+        	CSSendDataResponse response = CSSendDataResponse.newBuilder().setError(e.getMessage()).build();
+    		responseObserver.onNext(response);
+            responseObserver.onCompleted();
         }
     }
     @Override
@@ -53,7 +56,10 @@ public class ComputeServiceImpl extends ComputeServiceImplBase{
             responseObserver.onNext(responseBuilder.build());
             responseObserver.onCompleted();
         } catch (Exception e) {
-            responseObserver.onError(e);
+        	e.printStackTrace();
+        	CSRetreiveArrResponse response = CSRetreiveArrResponse.newBuilder().setError(e.getMessage()).build();
+    		responseObserver.onNext(response);
+            responseObserver.onCompleted();
         }
     }
     @Override
@@ -71,7 +77,10 @@ public class ComputeServiceImpl extends ComputeServiceImplBase{
             responseObserver.onNext(responseBuilder.build());
             responseObserver.onCompleted();
         } catch (Exception e) {
-            responseObserver.onError(e);
+        	e.printStackTrace();
+        	CSRetreiveAlResponse response = CSRetreiveAlResponse.newBuilder().setError(e.getMessage()).build();
+    		responseObserver.onNext(response);
+            responseObserver.onCompleted();
         }
     }
     
