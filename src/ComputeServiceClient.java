@@ -62,8 +62,7 @@ public class ComputeServiceClient implements ComputeEngineStorageSystem{ // Boil
 					System.out.println("Here is a randomized and sorted char array with length " +userInputConfig.getUserData());
 					for(int i = 0; i < sortedArr.length; i++) {
 						if(i % 10 == 0) {
-							
-						}
+							System.out.println();						}
 						System.out.print(sortedArr[i] + " ");
 					}
 					userData.close();
