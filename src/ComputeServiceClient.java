@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -81,9 +82,16 @@ public class ComputeServiceClient implements ComputeEngineStorageSystem{ // Boil
 			InputConfig userFileInputConfig = new FileInputConfig(fileName);
 			UUID key = sendData(userFileInputConfig);
 			ArrayList<char[]> userCharAl = retrieveCharAl(key);
-			for(char[] arr : userCharAl) {
-				System.out.print(arr);
+			
+			for(int i = 0; i < userCharAl.size(); i++) {
+				for(char c : userCharAl.get(i)) {
+					System.out.print(c + " ");
+				}
+				System.out.println();
 			}
+//			for(char[] arr : userCharAl) {
+//				System.out.print(arr);
+//			}
 		} else {
 			System.out.println("Incorrect input");
 		}
@@ -154,13 +162,28 @@ public class ComputeServiceClient implements ComputeEngineStorageSystem{ // Boil
 		}
 		//System.out.println(response);
 		
+		List<String> strList = response.getCharArraysList();
 		ArrayList<char[]> charAl = new ArrayList<>();
 		
-		for(int i = 0; i < response.getCharArraysCount(); i++) {
-			String strResponse = response.getCharArrays(i);
-			char[] arr = strResponse.toCharArray();
-			charAl.add(arr);	
+		
+	
+		for(String s : strList) {
+				charAl.add(s.toCharArray());
+
 		}
+
+//		
+//		for(int i = 0; i < strList.size(); i++) {
+//			String str = strList.get(i);
+//			char[] arr = str.toCharArray();
+//			charAl.add(arr);
+//		}
+		
+//		for(int i = 0; i < response.getCharArraysCount(); i++) {
+//			String strResponse = response.getCharArrays(i);
+//			char[] arr = strResponse.toCharArray();
+//			charAl.add(arr);	
+//		}
 
 		
 
@@ -200,12 +223,29 @@ public class ComputeServiceClient implements ComputeEngineStorageSystem{ // Boil
 			return null;
 		}
 		
-		String stringResponse = response.toString();
+		List<String> stringResponse = response.getCharArrayList();
+		char[] arr = new char[stringResponse.size()];
 		
-		char[] arr = new char[stringResponse.length()];
-		for(int i = 0; i < stringResponse.length(); i++) {
-			arr[i] = stringResponse.charAt(i);
+		int index = 0;
+		
+		for(String s : stringResponse) {
+			for(char c : s.toCharArray()) {
+				arr[index++] = c;
+			}
 		}
+		
+		
+//		char[] arr = new char[stringResponse.length()];
+//		
+//		for(int i = 0; i < response.getCharArrayCount(); i++) {
+//			String strResponse = response.getCharArray(i);
+//			
+//		}
+//		
+//		
+//		for(int i = 0; i < stringResponse.length(); i++) {
+//			arr[i] = stringResponse.charAt(i);
+//		}
 		return arr;
 	}
 
