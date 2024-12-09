@@ -12,7 +12,7 @@ public class ComputeServer { // Boilerplate TODO: Change name of class
 
       private void start() throws IOException {
         /* The port on which the server should run */
-        int port = 50051; // Boilerplate TODO: Consider changing the port (only one server per port)
+        int port = 50052; // Boilerplate TODO: Consider changing the port (only one server per port)
         
         server = Grpc.newServerBuilderForPort(port, InsecureServerCredentials.create())
             .addService(new ComputeServiceImpl()) // Boilerplate TODO: Change name of class

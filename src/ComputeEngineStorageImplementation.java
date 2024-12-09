@@ -152,6 +152,12 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 	
 		
 	}
+
+	@Override
+	public File userFile(ArrayList<char[]> al) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 //
@@ -183,20 +189,20 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 //	}
 	
 	
-	public File userFile(ArrayList<char[]> charAl) throws IOException{
-		if(charAl.isEmpty()) {
-			throw new IllegalArgumentException("ArrayList cannot be null");
-		}
-		try {
-			DataStorageSystem dss = new DataStorageImplementation();
-			File userFile = dss.mkFile(charAl);
-			return userFile;
-		}catch(Exception e) {
-			throw new RuntimeException("error creating file");
-		}
-		
-		
-	}
+//	public File userFile(ArrayList<char[]> charAl) throws IOException{
+//		if(charAl.isEmpty()) {
+//			throw new IllegalArgumentException("ArrayList cannot be null");
+//		}
+//		try {
+//			DataStorageSystem dss = new DataStorageImplementation();
+//			File userFile = dss.mkFile(charAl);
+//			return userFile;
+//		}catch(Exception e) {
+//			throw new RuntimeException("error creating file");
+//		}
+//		
+//		
+//	}
 
 	
 

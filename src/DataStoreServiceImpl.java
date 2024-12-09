@@ -7,10 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-import com.example.grpc.ComputeProto.CharArrayListResponse;
-import com.example.grpc.ComputeProto.CharArrayResponse;
-import com.example.grpc.ComputeProto.UUIDRequest;
-import com.example.grpc.ComputeProto.UUIDResponse;
 import com.example.grpc.DataStorageImplementationServiceGrpc.DataStorageImplementationServiceImplBase;
 import com.example.grpc.DataStore.DSRecieveDataResponse;
 import com.example.grpc.DataStore.DSSendDataResponse;
@@ -45,9 +41,9 @@ public class DataStoreServiceImpl extends DataStorageImplementationServiceImplBa
         try {
         	//String strRequest = request.toString();
             ArrayList<Integer> intAl = dss.recieveData(UUID.fromString(request.getKey()));
-            CharArrayResponse.Builder responseBuilder = CharArrayResponse.newBuilder();
+            DSRecieveDataResponse.Builder responseBuilder = DSRecieveDataResponse.newBuilder();
             for (int i : intAl) {
-                responseBuilder.addCharArray(String.valueOf(i));
+                responseBuilder.setIntArrays(String.valueOf(i));
             }
             String strResponse = "";
             for(int i = 0; i < intAl.size(); i++) {
@@ -72,29 +68,31 @@ public class DataStoreServiceImpl extends DataStorageImplementationServiceImplBa
         		charArrAl.add(charArr);
         	}
             File userFile = dss.mkFile(charArrAl);
-            CharArrayListResponse.Builder responseBuilder = CharArrayListResponse.newBuilder();
-            try (BufferedReader br = new BufferedReader(new FileReader(userFile))) {
-                String line;
-                while ((line = br.readLine()) != null) {
-                	CharArrayResponse.Builder charArrayResponseBuilder = CharArrayResponse.newBuilder();
-                	charArrayResponseBuilder.addCharArray(line);
-                	responseBuilder.addCharArrayList(charArrayResponseBuilder.build());
-                }
-            String strResponse = "";
-            try (BufferedReader br2 = new BufferedReader(new FileReader(userFile))){
-            	String line2;
-                while ((line2 = br.readLine()) != null) {
-                	strResponse = strResponse + line2;
-                }
-            }
-                MkFileResponse response = MkFileResponse.newBuilder().setFile(strResponse).build();
+            MkFileResponse.Builder responseBuilder = MkFileResponse.newBuilder();
+//            try {
+//            try (BufferedReader br = new BufferedReader(new FileReader(userFile))) {
+//                String line;
+//                while ((line = br.readLine()) != null) {
+//                	MkFileResponse.Builder charArrayResponseBuilder = MkFileResponse.newBuilder();
+//                	charArrayResponseBuilder.setFile(line);
+//                	responseBuilder.setFile(userFile.toString());
+                //}
+//            String strResponse = "";
+//            try (BufferedReader br2 = new BufferedReader(new FileReader(userFile))){
+//            	String line2;
+//                while ((line2 = br.readLine()) != null) {
+//                	strResponse = strResponse + line2;
+//                }
+//            }
+                MkFileResponse response = MkFileResponse.newBuilder().setFile(userFile.toString()).build();
                 responseObserver.onNext(response);
                 responseObserver.onCompleted();
-            } catch (IOException e) {
-            	System.out.println("Error while reading file in DataStoreServiceImpl");
-                e.printStackTrace();
-            }
+//            } catch (IOException e) {
+//            	System.out.println("Error while reading file in DataStoreServiceImpl");
+//                e.printStackTrace();
+//            }
         } catch (Exception e) {
+        	System.out.print("In the MkFile for DSImpl");
             responseObserver.onError(e);
         }
     }
