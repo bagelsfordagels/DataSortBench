@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -38,10 +39,10 @@ public class ComputeServiceClient implements ComputeEngineStorageSystem{ // Boil
 		
 		int userChoice = userData.nextInt();
 		
-		 String target = "localhost:50052";  // Boilerplate TODO: make sure the server/port match the server/port you want to connect to
+//		 String target = "localhost:50052";  // Boilerplate TODO: make sure the server/port match the server/port you want to connect to
 
-	     ManagedChannel channel = Grpc.newChannelBuilder(target, InsecureChannelCredentials.create())
-	    		 .build();
+//	     ManagedChannel channel = Grpc.newChannelBuilder(target, InsecureChannelCredentials.create())
+//	    		 .build();
 
 		//ComputeEngineStorageSystem css = new ComputeServiceClient(channel);
 		if(userChoice == 1) {
@@ -60,6 +61,9 @@ public class ComputeServiceClient implements ComputeEngineStorageSystem{ // Boil
 					
 					System.out.println("Here is a randomized and sorted char array with length " +userInputConfig.getUserData());
 					for(int i = 0; i < sortedArr.length; i++) {
+						if(i % 10 == 0) {
+							System.out.println();						
+						}
 						System.out.print(sortedArr[i] + " ");
 					}
 					userData.close();
@@ -81,13 +85,20 @@ public class ComputeServiceClient implements ComputeEngineStorageSystem{ // Boil
 			InputConfig userFileInputConfig = new FileInputConfig(fileName);
 			UUID key = sendData(userFileInputConfig);
 			ArrayList<char[]> userCharAl = retrieveCharAl(key);
-			for(char[] arr : userCharAl) {
-				System.out.print(arr);
+			System.out.println("Here are the randomized arrays from the file\n");
+			for(int i = 0; i < userCharAl.size(); i++) {
+				for(char c : userCharAl.get(i)) {
+					System.out.print(c + " ");
+				}
+				System.out.println();
 			}
+			System.out.println("\nA file called UserData.txt was created with the arrays");
+//			for(char[] arr : userCharAl) {
+//				System.out.print(arr);
+//			}
 		} else {
 			System.out.println("Incorrect input");
 		}
-		
 		userData.close();
 		
 	}
@@ -154,13 +165,28 @@ public class ComputeServiceClient implements ComputeEngineStorageSystem{ // Boil
 		}
 		//System.out.println(response);
 		
+		List<String> strList = response.getCharArraysList();
 		ArrayList<char[]> charAl = new ArrayList<>();
 		
-		for(int i = 0; i < response.getCharArraysCount(); i++) {
-			String strResponse = response.getCharArrays(i);
-			char[] arr = strResponse.toCharArray();
-			charAl.add(arr);	
+		
+	
+		for(String s : strList) {
+				charAl.add(s.toCharArray());
+
 		}
+
+//		
+//		for(int i = 0; i < strList.size(); i++) {
+//			String str = strList.get(i);
+//			char[] arr = str.toCharArray();
+//			charAl.add(arr);
+//		}
+		
+//		for(int i = 0; i < response.getCharArraysCount(); i++) {
+//			String strResponse = response.getCharArrays(i);
+//			char[] arr = strResponse.toCharArray();
+//			charAl.add(arr);	
+//		}
 
 		
 
@@ -200,12 +226,29 @@ public class ComputeServiceClient implements ComputeEngineStorageSystem{ // Boil
 			return null;
 		}
 		
-		String stringResponse = response.toString();
+		List<String> stringResponse = response.getCharArrayList();
+		char[] arr = new char[stringResponse.size()];
 		
-		char[] arr = new char[stringResponse.length()];
-		for(int i = 0; i < stringResponse.length(); i++) {
-			arr[i] = stringResponse.charAt(i);
+		int index = 0;
+		
+		for(String s : stringResponse) {
+			for(char c : s.toCharArray()) {
+				arr[index++] = c;
+			}
 		}
+		
+		
+//		char[] arr = new char[stringResponse.length()];
+//		
+//		for(int i = 0; i < response.getCharArrayCount(); i++) {
+//			String strResponse = response.getCharArray(i);
+//			
+//		}
+//		
+//		
+//		for(int i = 0; i < stringResponse.length(); i++) {
+//			arr[i] = stringResponse.charAt(i);
+//		}
 		return arr;
 	}
 
