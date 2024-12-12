@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -76,10 +77,10 @@ public ArrayList<Integer> recieveData(UUID key) throws Exception {
         e.printStackTrace();
         return null;
     }
-    String stringResponse = response.toString();
+    List<String> stringResponse = response.getIntArraysList();
     ArrayList<Integer> intAl = new ArrayList<>();
-    for(int i = 0; i < stringResponse.length(); i++) {
-    	int x = (stringResponse.charAt(i));
+    for(int i = 0; i < stringResponse.size(); i++) {
+    	int x = Integer.parseInt(stringResponse.get(i));
     	intAl.add(x);
     }
 	return intAl;

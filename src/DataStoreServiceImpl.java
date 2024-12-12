@@ -12,6 +12,7 @@ import com.example.grpc.DataStore.DSRecieveDataResponse;
 import com.example.grpc.DataStore.DSSendDataResponse;
 import com.example.grpc.DataStore.MkFileResponse;
 import com.example.grpc.Service.CSRetreiveAlResponse;
+import com.example.grpc.Service.CSSendDataResponse;
 
 import io.grpc.stub.StreamObserver;
 
@@ -25,18 +26,41 @@ public class DataStoreServiceImpl extends DataStorageImplementationServiceImplBa
     @Override
     public void sendData(com.example.grpc.DataStore.DSSendDataRequest request,
             io.grpc.stub.StreamObserver<com.example.grpc.DataStore.DSSendDataResponse> responseObserver) {
-        try {
-        	String strRequest = request.getFileInput();
-        	InputConfig requestIC = new FileInputConfig(strRequest);
-            UUID key = dss.sendData(requestIC);
+//        try {
+//        	String strRequest = request.getFileInput();
+//        	InputConfig requestIC = new FileInputConfig(strRequest);
+//            UUID key = dss.sendData(requestIC);
+//            DSSendDataResponse response = DSSendDataResponse.newBuilder().setKey(key.toString()).build();
+//            responseObserver.onNext(response);
+//            responseObserver.onCompleted();
+//        } catch (Exception e) {
+//        	e.printStackTrace();
+//        	DSSendDataResponse response = DSSendDataResponse.newBuilder().setError(e.getMessage()).build();
+//    		responseObserver.onNext(response);
+//            responseObserver.onCompleted();
+//        }
+    	try {
+    	if(request.hasIntInput()) {
+    		InputConfig input = new IntegerInputConfig(request.getIntInput());
+            UUID key = dss.sendData(input);
             DSSendDataResponse response = DSSendDataResponse.newBuilder().setKey(key.toString()).build();
             responseObserver.onNext(response);
             responseObserver.onCompleted();
-        } catch (Exception e) {
-        	e.printStackTrace();
-        	DSSendDataResponse response = DSSendDataResponse.newBuilder().setError(e.getMessage()).build();
+    	} else {
+    		InputConfig fileInput = new FileInputConfig(request.getFileInput());
+    		UUID key = dss.sendData(fileInput);  
+    		DSSendDataResponse response = DSSendDataResponse.newBuilder().setKey(key.toString()).build();
     		responseObserver.onNext(response);
             responseObserver.onCompleted();
+    	  }
+//    	String strRequest = request.toString();
+//    	int intRequest = Integer.parseInt(strRequest);
+    	
+    } catch (Exception e) {
+    	e.printStackTrace();
+    	DSSendDataResponse response = DSSendDataResponse.newBuilder().setError(e.getMessage()).build();
+    	responseObserver.onNext(response);
+    	responseObserver.onCompleted();
         }
     }
     @Override
@@ -47,14 +71,11 @@ public class DataStoreServiceImpl extends DataStorageImplementationServiceImplBa
             ArrayList<Integer> intAl = dss.recieveData(UUID.fromString(request.getKey()));
             DSRecieveDataResponse.Builder responseBuilder = DSRecieveDataResponse.newBuilder();
             for (int i : intAl) {
-                responseBuilder.setIntArrays(String.valueOf(i));
+                responseBuilder.addIntArrays(String.valueOf(i));
             }
-            String strResponse = "";
-            for(int i = 0; i < intAl.size(); i++) {
-            	strResponse = strResponse + intAl.get(i);
-            }
-            DSRecieveDataResponse response = DSRecieveDataResponse.newBuilder().setIntArrays(strResponse).build();
-            responseObserver.onNext(response);
+           
+
+            responseObserver.onNext(responseBuilder.build());
             responseObserver.onCompleted();
         } catch (Exception e) {
         	e.printStackTrace();
