@@ -16,7 +16,7 @@ import io.grpc.Grpc;
 import io.grpc.InsecureChannelCredentials;
 import io.grpc.ManagedChannel;
 
-public class ComputeEngineStorageImplementation implements ComputeEngineStorageSystem{
+public class ComputeEngineTestVersion implements ComputeEngineStorageSystem{
 	int userData;
 	char[] sortedData;
 	private final ExecutorService executorService = Executors.newFixedThreadPool(4);
@@ -64,12 +64,12 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
     }
 	
 	public ArrayList<char[]> retrieveCharAl(UUID key, String fileName) throws Exception{
-		String target = "localhost:61073";  // Boilerplate TODO: make sure the server/port match the server/port you want to connect to
-		
-		  ManagedChannel channel = Grpc.newChannelBuilder(target, InsecureChannelCredentials.create())
-		          .build();
-		  try {  
-			DataStorageSystem dss = new DataStoreClient(channel);
+//		String target = "localhost:61073";  // Boilerplate TODO: make sure the server/port match the server/port you want to connect to
+//		
+//		  ManagedChannel channel = Grpc.newChannelBuilder(target, InsecureChannelCredentials.create())
+//		          .build();
+  
+			DataStorageSystem dss = new DSImpOptimization();
 			ComputeEngine cpe = new ComputeEngine();
 			if(key == null) {
 				throw new IllegalArgumentException("Key cannot be null");
@@ -111,9 +111,6 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 			}catch(Exception e) {
 				throw new RuntimeException("Error retrieving data for key: "+key, e);
 			}
-		}finally {
-	      channel.shutdownNow().awaitTermination(5, TimeUnit.SECONDS);
-		  }
 		
 	}
 	@Override
@@ -158,55 +155,4 @@ public class ComputeEngineStorageImplementation implements ComputeEngineStorageS
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-//
-//	public char[] retreiveSortedData(UUID key) throws IOException{
-//		// retrieves user entered integer from map
-//		// if user enters integer
-//		if(dataStore.get(key) instanceof IntegerInputConfig) {
-//			InputConfig userInt = dataStore.get(key);
-//			char[] arr = ComputeEngine.mkArr(userInt);
-//			return arr;
-//		}
-//		// if user enters file name
-//		if(dataStore.get(key) instanceof FileInputConfig) {
-//			InputConfig file = dataStore.get(key);
-//			DataStorageSystem dss = new DataStorageImplementation();
-//			ComputeEngine cpe = new ComputeEngine();
-//			UUID fileKey = dss.sendData(file);
-//			ArrayList<Integer> userInts = dss.recieveData(fileKey);
-//			ArrayList<char[]> charAl = cpe.readFile(userInts);
-//			
-//			userFile(charAl);
-//			// just for compiling
-//			// not sure what it should be returning 
-//			return charAl;
-//			
-//		} else {
-//			return null;
-//		}
-//	}
-	
-	
-//	public File userFile(ArrayList<char[]> charAl) throws IOException{
-//		if(charAl.isEmpty()) {
-//			throw new IllegalArgumentException("ArrayList cannot be null");
-//		}
-//		try {
-//			DataStorageSystem dss = new DataStorageImplementation();
-//			File userFile = dss.mkFile(charAl);
-//			return userFile;
-//		}catch(Exception e) {
-//			throw new RuntimeException("error creating file");
-//		}
-//		
-//		
-//	}
-
-	
-
-	
-
-
 }

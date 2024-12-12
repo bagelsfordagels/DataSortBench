@@ -8,9 +8,9 @@ public class TestUser {
 	
 	// TODO 3: change the type of this variable to the name you're using for your
 	// User <-> ComputeEngine API; also update the parameter passed to the constructor
-	private final ComputeEngineStorageImplementation coordinator;
+	private final ComputeEngineTestVersion coordinator;
 
-	public TestUser(ComputeEngineStorageImplementation coordinator) {
+	public TestUser(ComputeEngineTestVersion coordinator) {
 		this.coordinator = coordinator;
 	}
 
