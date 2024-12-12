@@ -224,8 +224,8 @@ public class ComputeServiceClient implements ComputeEngineStorageSystem{ // Boil
 		} catch(StatusRuntimeException e) {
 			e.printStackTrace();
 			System.out.println("Error with the charArr");
-			char[] cArr = {};
-			return cArr;
+			char[] charArr = {};
+			return charArr;
 		}
 		
 		List<String> stringResponse = response.getCharArrayList();
