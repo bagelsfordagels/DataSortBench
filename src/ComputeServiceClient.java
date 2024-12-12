@@ -61,7 +61,7 @@ public class ComputeServiceClient implements ComputeEngineStorageSystem{ // Boil
 					
 					System.out.println("Here is a randomized and sorted char array with length " +userInputConfig.getUserData());
 					for(int i = 0; i < sortedArr.length; i++) {
-						if(i % 10 == 0) {
+						if(i % 10 == 0) {  // print new line if line is 10 in length
 							System.out.println();						
 						}
 						System.out.print(sortedArr[i] + " ");
@@ -174,6 +174,7 @@ public class ComputeServiceClient implements ComputeEngineStorageSystem{ // Boil
 				charAl.add(s.toCharArray());
 
 		}
+		
 
 //		
 //		for(int i = 0; i < strList.size(); i++) {
