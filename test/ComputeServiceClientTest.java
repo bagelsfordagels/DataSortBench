@@ -69,7 +69,7 @@ public class ComputeServiceClientTest {
         Assertions.assertEquals(5, result.length);
        
        
-        // testing retrieve ArrayList
+        // testing retrieve Array List
         ArrayList<char[]> testAl = client.retrieveCharAl(key2);
         Assertions.assertEquals(3, testAl.size());
         
