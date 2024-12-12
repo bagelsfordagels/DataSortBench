@@ -15,6 +15,7 @@ message CSSendDataRequest {
 
 message CSSendDataResponse {
 	optional string uuid = 1;
+	optional string Error = 2;
 }
 
 message CSRetreiveArrRequest {
@@ -23,6 +24,7 @@ message CSRetreiveArrRequest {
 
 message CSRetreiveArrResponse {
 	repeated string charArray = 1;
+	optional string Error = 2;
 }
 
 message CSRetreiveAlRequest {
@@ -32,4 +34,5 @@ message CSRetreiveAlRequest {
 
 message CSRetreiveAlResponse {
 	repeated string charArrays = 1;
+	optional string Error = 2;
 }
