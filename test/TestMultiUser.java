@@ -17,7 +17,7 @@ public class TestMultiUser {
 	
 	// TODO 1: change the type of this variable to the name you're using for your
 	// User <-> ComputeEngine API
-	private ComputeEngineStorageImplementation coordinator;
+	private ComputeEngineTestVersion coordinator;
 	
 	@BeforeEach
 	public void initializeComputeEngine() {
@@ -25,7 +25,7 @@ public class TestMultiUser {
 		// that the user will make requests to
 		// Store it in the 'coordinator' instance variable
 
-		coordinator = new ComputeEngineStorageImplementation();
+		coordinator = new ComputeEngineTestVersion();
 		
 
 	}
