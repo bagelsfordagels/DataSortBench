@@ -51,7 +51,7 @@ public class ComputeServiceImpl extends ComputeServiceImplBase{
             char[] charArray = css.retrieveCharArr(UUID.fromString(request.getUuid()));
             CSRetreiveArrResponse.Builder responseBuilder = CSRetreiveArrResponse.newBuilder();
             for (char c : charArray) {
-                responseBuilder.setCharArray(String.valueOf(c));
+                responseBuilder.addCharArray(String.valueOf(c));
             }
             responseObserver.onNext(responseBuilder.build());
             responseObserver.onCompleted();
@@ -65,15 +65,25 @@ public class ComputeServiceImpl extends ComputeServiceImplBase{
     @Override
     public void retrieveCharAl(CSRetreiveAlRequest request, StreamObserver<CSRetreiveAlResponse> responseObserver) {
         try {
-            ArrayList<char[]> charAl = css.retrieveCharAl(UUID.fromString(request.getUuid()));
+            ArrayList<char[]> charAl = css.retrieveCharAl(UUID.fromString(request.getUuid())); // charAl has correct elements
             CSRetreiveAlResponse.Builder responseBuilder = CSRetreiveAlResponse.newBuilder();
-            for (char[] arr : charAl) {
-            	CSRetreiveAlResponse.Builder charAlResponseBuilder = CSRetreiveAlResponse.newBuilder();
-                for (char c : arr) {
-                    charAlResponseBuilder.addCharArrays(String.valueOf(c));
-                }
-                responseBuilder.addCharArrays(charAlResponseBuilder.toString());
+            
+            for(char[] arr : charAl) {
+            	StringBuilder charArrayBuilder = new StringBuilder();
+            	for(char c : arr) {
+            		charArrayBuilder.append(c);
+            	}
+            	responseBuilder.addCharArrays(charArrayBuilder.toString());
             }
+            
+            
+//            for (char[] arr : charAl) {
+//            	CSRetreiveAlResponse.Builder charAlResponseBuilder = CSRetreiveAlResponse.newBuilder();
+//                for (char c : arr) {
+//                    charAlResponseBuilder.addCharArrays(String.valueOf(c));
+//                }
+//                responseBuilder.addCharArrays(charAlResponseBuilder.toString());
+//            }
             responseObserver.onNext(responseBuilder.build());
             responseObserver.onCompleted();
         } catch (Exception e) {

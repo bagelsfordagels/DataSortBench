@@ -23,7 +23,7 @@ message CSRetreiveArrRequest {
 }
 
 message CSRetreiveArrResponse {
-	optional string charArray = 1;
+	repeated string charArray = 1;
 	optional string Error = 2;
 }
 
