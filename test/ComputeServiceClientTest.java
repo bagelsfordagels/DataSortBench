@@ -24,7 +24,7 @@ public class ComputeServiceClientTest {
 	private Server server;
 	private String serverName;
     
-	// start in-process server
+	// start the in-process server
 	public void start() throws IOException{
         serverName = InProcessServerBuilder.generateName();
         try {
